@@ -12,7 +12,7 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('auth.login');
 });
 
 Auth::routes();
@@ -21,3 +21,6 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 Route::get('/redirect', 'SocialAuthFacebookController@redirect');
 Route::get('/callback', 'SocialAuthFacebookController@callback');
+
+Route::resource('activity', 'ActivityController');
+Route::get('activity_datatable', 'ActivityController@datatable');

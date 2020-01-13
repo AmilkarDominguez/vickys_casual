@@ -1,0 +1,29 @@
+@font-face {
+  font-family: "Futura Md BT";
+  src: url("../fonts/futura_medium.ttf");
+}
+html,
+body {
+  font-family: "Futura Md BT";
+  height: 100%;
+}
+
+.btn {
+  border-radius: 0px !important;
+  text-transform: none !important;
+}
+
+input[type="file"] {
+  display: none;
+}
+.custom-file-upload {
+  color: white !important;
+  background-color: black !important;
+  display: inline-block;
+  padding: 6px 12px;
+  cursor: pointer;
+}
+
+.imgScan{
+  width: 200px !important;
+}

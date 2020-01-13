@@ -1,7 +1,47 @@
-@extends('layouts.app')
+@extends('layouts.vc_app')
+
+
+@section('styles')
+<link href="{{ asset('css/bootstrap_.css') }}" rel="stylesheet">
+<link href="{{ asset('css/signin.css') }}" rel="stylesheet">
+@endsection
 
 @section('content')
-<div class="container">
+
+
+
+<form class="form-signin">
+
+        <img class="mb-4" src="resources/vc.png" alt="" width="250">
+        <h1 class="h3 mb-3 font-weight-normal">REGÍSTRATE</h1>
+
+        <label for="inputEmail" class="sr-only">celular</label>
+        <input type="number" id="inputEmail" class="form-control" placeholder="celular" required autofocus>
+        <label for="inputPassword" class="sr-only">contraseña</label>
+        <input type="password" id="inputPassword" class="form-control" placeholder="contraseña" required>
+
+
+        <div class="d-flex flex-row bd-highlight mb-3">
+            <div class="p-2 bd-highlight">
+                <div class="checkbox">
+                    <label>
+                        <input type="checkbox" value="remember-me"> mostrar contraseña
+                    </label>
+                    <!--<br>
+                <a class="text-white" data-toggle="modal" data-target="#exampleModal">Registrarse</a> -->
+                </div>
+            </div>
+        </div>
+        <a class="btn btn-lg bg-white btn-block text-dark" href="{{ route('activity.index') }}" >Log in</a>
+        <a href="{{url('/redirect')}}"  style="margin-top: 15px;" class="btn btn-lg bg-white btn-block"><i class="fab fa-facebook"></i>Registrate con facebook</a>
+        <!-- <p class="mt-5 mb-3 text-muted">&copy; 2020</p> -->
+
+
+</form>
+
+
+
+<!-- <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
@@ -77,5 +117,5 @@
             </div>
         </div>
     </div>
-</div>
+</div> -->
 @endsection

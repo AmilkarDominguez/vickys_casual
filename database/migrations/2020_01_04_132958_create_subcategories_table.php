@@ -16,6 +16,16 @@ class CreateSubcategoriesTable extends Migration
         Schema::create('subcategories', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->timestamps();
+
+            $table->enum('state', ['ACTIVO', 'INACTIVO','ELIMINADO'])->default('ACTIVO');
+            $table->string('name');
+            $table->text('description')->nullable();
+
+            $table->unsignedBigInteger('id_category')->unsigned()->nullable();
+            //RELACTIONS
+            $table->foreign('id_category')->references('id')->on('categories')
+            ->onDelete('cascade')
+            ->onUpdate('cascade');
         });
     }
 

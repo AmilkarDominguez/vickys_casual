@@ -1,0 +1,35 @@
+body {
+  /* background-image: url("../resources/model.jpg"); */
+  /* background-size: cover;
+  background-repeat: no-repeat; */
+  background-color: #cccccc !important;
+
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-align: center;
+  align-items: center;
+  padding-top: 40px;
+  padding-bottom: 40px;
+  background-color: #000000;
+  color: #000000 !important;
+}
+ol,ul {
+	list-style:none !important;
+}
+.bg-black {
+  background-color: #000000;
+}
+.input-file{
+    margin-bottom: 10px;
+}
+.history{
+    margin-top: 50px;
+}
+.text-black{
+  color: #000000 !important;
+}
+
+.container{
+	position: relative !important;
+	text-align: center !important;
+}
