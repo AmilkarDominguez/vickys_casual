@@ -18,9 +18,17 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/cpanel', 'AdminController@cpanel')->name('cpanel');
 
 Route::get('/redirect', 'SocialAuthFacebookController@redirect');
 Route::get('/callback', 'SocialAuthFacebookController@callback');
 
 Route::resource('activity', 'ActivityController');
 Route::get('activity_datatable', 'ActivityController@datatable');
+
+//Admin CPANEL
+Route::resource('Category', 'CategoryController');
+Route::get('Category_dt', 'CategoryController@datatable');
+
+Route::resource('Subcategory', 'SubcategoryController');
+Route::get('Subcategory_dt', 'SubcategoryController@datatable');

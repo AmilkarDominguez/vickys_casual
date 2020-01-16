@@ -2,84 +2,76 @@
 
 namespace App\Http\Controllers;
 
-use App\Subcategory;
 use Illuminate\Http\Request;
+use App\Subcategory;
+use App\Http\Requests\SubcategoryRequest;
+use Validator;
 
 class SubcategoryController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
     public function index()
     {
-        //
+        return view('admin.Subcategory');
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
-        //
+        $rule = new SubcategoryRequest();        
+        $validator = Validator::make($request->all(), $rule->rules());
+        if ($validator->fails())
+        {
+            return response()->json(['success'=>false,'msg'=>$validator->errors()->all()]);
+        } 
+        else{
+            Subcategory::create($request->all());
+            return response()->json(['success'=>true,'msg'=>'Registro existoso.']);
+        }
+    }
+    public function edit(Request $request)
+    {
+        $Subcategory = Subcategory::find($request->id);
+        return $Subcategory->toJson();
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Subcategory  $subcategory
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Subcategory $subcategory)
+    public function update(Request $request)
     {
-        //
+        $rule = new SubcategoryRequest();        
+        $validator = Validator::make($request->all(), $rule->rules());
+        if ($validator->fails())
+        {
+            return response()->json(['success'=>false,'msg'=>$validator->errors()->all()]);
+        } 
+        else{
+            $Subcategory = Subcategory::find($request->id);
+            $Subcategory->update($request->all());
+            return response()->json(['success'=>true,'msg'=>'Se actualizo existosamente.']);
+        }
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Subcategory  $subcategory
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Subcategory $subcategory)
+    public function destroy(Request $request)
     {
-        //
+        $Subcategory = Subcategory::find($request->id);
+        $Subcategory->state = "ELIMINADO";
+        $Subcategory->update();
+        return response()->json(['success'=>true,'msg'=>'Registro borrado.']);
     }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Subcategory  $subcategory
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, Subcategory $subcategory)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Subcategory  $subcategory
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Subcategory $subcategory)
-    {
-        //
-    }
+     //FUNCTIONS
+     public function datatable()
+     {
+         //$isUser = auth()->user()->can(['provider.edit', 'provider.destroy']);
+         //Variable para la visiblidad
+         $visibility = "";
+         //if (!$isUser) {$visibility="disabled";}
+             return datatables()->of(Subcategory::where('state','!=','ELIMINADO')->get())
+             ->addColumn('Editar', function ($item) use ($visibility) {
+                 $item->v=$visibility;
+             return '<a class="btn btn-xs btn-primary text-white '.$item->v.'" onclick="Edit('.$item->id.')" ><i class="icon-pencil"></i></a>';
+             })
+             ->addColumn('Eliminar', function ($item) {
+                 return '<a class="btn btn-xs btn-danger text-white '.$item->v.'" onclick="Delete(\''.$item->id.'\')"><i class="icon-trash"></i></a>';
+                 })
+             ->rawColumns(['Editar','Eliminar'])    
+             ->toJson();   
+     }
 }

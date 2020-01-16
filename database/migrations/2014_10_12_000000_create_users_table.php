@@ -19,7 +19,7 @@ class CreateUsersTable extends Migration
             $table->string('name')->nullable();
             $table->string('gender')->nullable();
             $table->text('telephone')->nullable();
-            $table->string('rol')->nullable();
+            $table->enum('rol', ['ADMIN', 'NORMAL'])->default('NORMAL')->nullable();
             $table->string('email')->unique()->nullable();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');

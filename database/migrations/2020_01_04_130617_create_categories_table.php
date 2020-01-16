@@ -20,6 +20,7 @@ class CreateCategoriesTable extends Migration
             $table->enum('state', ['ACTIVO', 'INACTIVO','ELIMINADO'])->default('ACTIVO');
             $table->string('name');
             $table->text('description')->nullable();
+            
         });
     }
     /**
