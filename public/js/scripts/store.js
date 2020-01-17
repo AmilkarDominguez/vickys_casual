@@ -25,6 +25,9 @@ function ListDatatable() {
         columns: [
             { data: 'name' },
             { data: 'description' },
+            { data: 'city' },
+            { data: 'lat' },
+            { data: 'lng' },
             {
                 data: 'state',
                 "render": function (data, type, row) {
@@ -55,7 +58,7 @@ function ListDatatable() {
                 titleAttr: 'Excel',
                 extend: 'excel',
                 exportOptions: {
-                    columns: [0, 1]
+                    columns: [0, 1, 2, 3, 4]
                 }
             },
             {
@@ -64,7 +67,7 @@ function ListDatatable() {
                 titleAttr: 'PDF',
                 extend: 'pdf',
                 exportOptions: {
-                    columns: [0, 1]
+                    columns: [0, 1, 2, 3, 4]
                 }
             },
             {
@@ -73,7 +76,7 @@ function ListDatatable() {
                 titleAttr: 'Imprimir',
                 extend: 'print',
                 exportOptions: {
-                    columns: [0, 1]
+                    columns: [0, 1, 2, 3, 4]
                 }
             },
             //btn Refresh
@@ -135,6 +138,9 @@ function show_data(obj) {
     id = obj.id;
     $("#name").val(obj.name);
     $("#description").val(obj.description);
+    $("#city").val(obj.city);
+    $("#lat").val(obj.lat);
+    $("#lng").val(obj.lng);
     if (obj.state == "ACTIVO") {
         $('#state_activo').prop('checked', true);
     }
@@ -337,10 +343,23 @@ function MostrarDatosExcel() {
         if (result[i].DESCRIPCION == null) {
             result[i].DESCRIPCION = "";
         }
+        if (result[i].CIUDAD == null) {
+            result[i].CIUDAD = "";
+        }
+        if (result[i].LAT == null) {
+            result[i].LAT = "";
+        }
+        if (result[i].LNG == null) {
+            result[i].LNG = "";
+        }
         table_import.row.add([
             result[i].ID,
             result[i].NOMBRE,
-            result[i].DESCRIPCION
+            result[i].DESCRIPCION,
+            result[i].CIUDAD,
+            result[i].LAT,
+            result[i].LNG
+
         ]).draw(false);
     }
     $('#content').fadeIn(1000).html(' Datos leidos');
@@ -355,7 +374,10 @@ function Save_Import() {
         $('#content').html('<img src="/resources/loader.gif" alt="loading" /><br/>Un momento, por favor...');
         var objeto = {
             name: result[i].NOMBRE,
-            description: result[i].DESCRIPCION
+            description: result[i].DESCRIPCION,
+            city: result[i].CIUDAD,
+            lat: result[i].LAT,
+            lng: result[i].LNG
         };
 
 

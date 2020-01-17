@@ -134,7 +134,7 @@
                     <p>
                         <span class="text-warning"><i class="icon-attention"></i><b>Importante:</b></span>
                         Utilice la plantilla para importar los datos.
-                        <a href="/resources/templates/categoria.xlsx" download>Descargar plantilla</a>
+                        <a href="/resources/templates/subcategoria.xlsx" download>Descargar plantilla</a>
                     </p>
 
                     <p class="text-primary" id="content"></p>

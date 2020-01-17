@@ -33,3 +33,6 @@ Route::get('Category_list', 'CategoryController@list');
 
 Route::resource('Subcategory', 'SubcategoryController');
 Route::get('Subcategory_dt', 'SubcategoryController@datatable');
+
+Route::resource('Store', 'StoreController');
+Route::get('Store_dt', 'StoreController@datatable');

@@ -7,7 +7,7 @@
             <div class="card-body">
                 <div class="row">
                     <div class="col-sm-6">
-                        <h2 class="card-title text-dark">Tiendas</h2>
+                        <h2 class="card-title text-dark">Sucursales</h2>
                     </div>
                     <div class="col-sm-6 d-flex justify-content-end">
                         <button class="btn btn-outline-primary m-1" id="btn-import">
@@ -32,6 +32,9 @@
                             <tr>
                                 <td>Nombre</td>
                                 <td>Descripción</td>
+                                <td>Ciudad</td>
+                                <td>Latitud</td>
+                                <td>Longitud</td>
                                 <td>Estado</td>
                                 <td>Editar</td>
                                 <td>Eliminar</td>
@@ -59,6 +62,26 @@
                 <div class="modal-body">
                     <div class="modal-body">
                         <div class="md-form mb-3">
+                            <div class="form-group">
+                                <label><b>Departamento:</b></label>
+                                <select class="form-control" name="city" id="city" required>
+                                    <option disabled value="" selected>(Seleccionar)</option>
+                                    <option value="BENI">BENI</option>
+                                    <option value="COCHABAMBA">COCHABAMBA</option>
+                                    <option value="LA PAZ">LA PAZ</option>
+                                    <option value="ORURO">ORURO</option>
+                                    <option value="PANDO">PANDO</option>
+                                    <option value="POTOSI">POTOSI</option>
+                                    <option value="SANTA CRUZ">SANTA CRUZ</option>
+                                    <option value="SUCRE">SUCRE</option>
+                                    <option value="TARIJA">TARIJA</option>
+                                </select>
+                                <div class="invalid-feedback">
+                                    Dato necesario.
+                                </div>
+                            </div>
+                        </div>
+                        <div class="md-form mb-3">
                             <label><b>Nombre:</b></label>
                             <textarea type="text" class="form-control" rows="4" id="name" name="name" placeholder="Nombre" required></textarea>
                             <div class="invalid-feedback">
@@ -68,6 +91,20 @@
                         <div class="md-form mb-3">
                             <label><b>Descripción:</b></label>
                             <textarea type="text" class="form-control" rows="4" id="description" name="description" placeholder="Descripción" required></textarea>
+                            <div class="invalid-feedback">
+                                Dato necesario.
+                            </div>
+                        </div>
+                        <div class="md-form mb-3">
+                            <label><b>Latitud:</b></label>
+                            <input type="text" class="form-control" rows="4" id="lat" name="lat" placeholder="Latitud" required/>
+                            <div class="invalid-feedback">
+                                Dato necesario.
+                            </div>
+                        </div>
+                        <div class="md-form mb-3">
+                            <label><b>Longitud:</b></label>
+                            <input type="text" class="form-control" rows="4" id="lng" name="lng" placeholder="Longitud" required/>
                             <div class="invalid-feedback">
                                 Dato necesario.
                             </div>
@@ -132,7 +169,7 @@
                     <p>
                         <span class="text-warning"><i class="icon-attention"></i><b>Importante:</b></span>
                         Utilice la plantilla para importar los datos.
-                        <a href="/resources/templates/categoria.xlsx" download>Descargar plantilla</a>
+                        <a href="/resources/templates/sucursal.xlsx" download>Descargar plantilla</a>
                     </p>
 
                     <p class="text-primary" id="content"></p>
@@ -148,6 +185,9 @@
                                     <th>ID</th>
                                     <th>NOMBRE</th>
                                     <th>DESCRIPCION</th>
+                                    <th>CIUDAD</th>
+                                    <th>LAT</th>
+                                    <th>LNG</th>
                                 </tr>
                             </thead>
                             <tbody>

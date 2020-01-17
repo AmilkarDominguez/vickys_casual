@@ -70,7 +70,7 @@
                                 <a class="dropdown-item" href="{{ route('Category.index') }}">Categorias</a>
                                 <a class="dropdown-item" href="{{ route('Subcategory.index') }}">Sub categorias</a>
                                 <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" href="{{ route('Subcategory.index') }}">Tiendas</a>
+                                <a class="dropdown-item" href="{{ route('Store.index') }}">Tiendas</a>
                                 <a class="dropdown-item" href="{{ route('Subcategory.index') }}">Productos</a>
                                 <div class="dropdown-divider"></div>
                                 <a class="dropdown-item" href="{{ route('Subcategory.index') }}">Tiendas</a>
@@ -83,6 +83,7 @@
                                 <i class="icon-download"></i>Reportes
                             </a>
                             <div class="dropdown-menu" aria-labelledby="navbarDropdownReportes">
+                            <a class="dropdown-item" href="{{ route('Category.index') }}">Usuarios registrados</a>
                                 <a class="dropdown-item" href="">¿?</a>
                             </div>
                         </li>

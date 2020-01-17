@@ -12,6 +12,6 @@ class Store extends Model
         'state',
         'city',
         'lat',
-        'long'
+        'lng'
     ];
 }
