@@ -6,5 +6,12 @@ use Illuminate\Database\Eloquent\Model;
 
 class Store extends Model
 {
-    //
+    protected $fillable = [
+        'name',
+        'description',
+        'state',
+        'city',
+        'lat',
+        'long'
+    ];
 }

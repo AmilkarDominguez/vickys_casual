@@ -29,6 +29,7 @@ Route::get('activity_datatable', 'ActivityController@datatable');
 //Admin CPANEL
 Route::resource('Category', 'CategoryController');
 Route::get('Category_dt', 'CategoryController@datatable');
+Route::get('Category_list', 'CategoryController@list');
 
 Route::resource('Subcategory', 'SubcategoryController');
 Route::get('Subcategory_dt', 'SubcategoryController@datatable');

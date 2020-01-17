@@ -1,16 +1,15 @@
 var table;
-var id=0;
+var id = 0;
 
 var title_modal_data = "Nueva Categoria";
-$(document).ready(function(){
+$(document).ready(function () {
     //ListDatatable();
     catch_parameters();
     ListDatatable();
 });
 
 // datatable catalogos
-function ListDatatable()
-{
+function ListDatatable() {
     table = $('#table').DataTable({
         dom: 'lfBrtip',
         //dom: 'lfrtip',
@@ -21,25 +20,26 @@ function ListDatatable()
             "url": "/js/assets/Spanish.json"
         },
         ajax: {
-            url: 'Category_dt'   
+            url: 'Category_dt'
         },
         columns: [
-            { data: 'name'},
-            { data: 'description'},
-            { data: 'state',
-            "render": function (data, type, row) {
+            { data: 'name' },
+            { data: 'description' },
+            {
+                data: 'state',
+                "render": function (data, type, row) {
                     if (row.state === 'ACTIVO') {
                         return '<center><p class="bg-success text-white"><b>ACTIVO</b></p></center>';
                     }
-                    else if (row.state === 'INACTIVO') {          
+                    else if (row.state === 'INACTIVO') {
                         return '<center><p class="bg-warning text-white"><b>INACTIVO</b></p></center>';
                     }
-                    else if (row.state === 'ELIMINADO') {          
+                    else if (row.state === 'ELIMINADO') {
                         return '<center><p class="bg-danger text-white"><b>ELIMINADO</b></p></center>';
                     }
                 }
             },
-            { data: 'Editar',   orderable: false, searchable: false },
+            { data: 'Editar', orderable: false, searchable: false },
             { data: 'Eliminar', orderable: false, searchable: false },
         ],
         buttons: [
@@ -132,7 +132,7 @@ var data_old;
 function show_data(obj) {
     ClearInputs();
     obj = JSON.parse(obj);
-    id= obj.id;
+    id = obj.id;
     $("#name").val(obj.name);
     $("#description").val(obj.description);
     if (obj.state == "ACTIVO") {
@@ -159,7 +159,7 @@ function Update() {
             success: function (result) {
                 if (result.success) {
                     toastr.success(result.msg);
-    
+
                 } else {
                     toastr.warning(result.msg);
                 }
@@ -170,14 +170,14 @@ function Update() {
             },
         });
         table.ajax.reload();
-        
+
     }
 }
 
 
 //funcion para eliminar valor seleccionado
 function Delete(id_) {
-    id= id_;
+    id = id_;
     $('#modal_eliminar').modal('show');
 }
 $("#btn_delete").click(function () {
@@ -195,7 +195,7 @@ $("#btn_delete").click(function () {
             }
         },
         error: function (result) {
-            toastr.error(result.msg +' CONTACTE A SU PROVEEDOR POR FAVOR.');
+            toastr.error(result.msg + ' CONTACTE A SU PROVEEDOR POR FAVOR.');
             console.log(result);
         },
 
@@ -221,19 +221,18 @@ function Mayus(e) {
 }
 
 // obtiene los datos del formulario
-function catch_parameters()
-{
+function catch_parameters() {
     var data = $(".form-data").serialize();
-    data += "&user_id="+user_id;
-    data += "&id="+id;
+    data += "&user_id=" + user_id;
+    data += "&id=" + id;
     //console.log(data);
     return data;
-    
+
 }
 
 // muestra el modal
 $("#btn-agregar").click(function () {
-    console.log("arrived");
+    // console.log("arrived");
     ClearInputs();
     $("#title-modal").html(title_modal_data);
     $("#modal_datos").modal("show");
@@ -274,5 +273,113 @@ function ClearInputs() {
     });
     //__Clean values of inputs
     $("#form-data")[0].reset();
-    id=0;
+    id = 0;
+};
+
+
+//Metodos para importar
+$("#btn-import").click(function () {
+    table_import.clear().draw();
+    $('#files').val('');
+    $("#btn_show_import").hide();
+    $("#modal_import").modal("show");
+});
+
+
+var result;
+function handleFile(e) {
+    //Get the files from Upload control
+    var files = e.target.files;
+    var i, f;
+    //Loop through files
+    for (i = 0, f = files[i]; i != files.length; ++i) {
+        var reader = new FileReader();
+        var name = f.name;
+        reader.onload = function (e) {
+            var data = e.target.result;
+            var workbook = XLSX.read(data, { type: 'binary' });
+            var sheet_name_list = workbook.SheetNames;
+            sheet_name_list.forEach(function (y) { /* iterate through sheets */
+                //Convert the cell value to Json
+                var roa = XLSX.utils.sheet_to_json(workbook.Sheets[y]);
+                if (roa.length > 0) {
+                    result = roa;
+
+                }
+            });
+            //Get the first column first cell value
+            //alert(result[0].Column1);
+            $('#btn_show_import').show();
+        };
+        reader.readAsArrayBuffer(f);
+    }
+}
+
+var table_import;
+//Change event to dropdownlist
+$(document).ready(function () {
+    $('#files').change(handleFile);
+    table_import = $('#table_import').DataTable({
+        language: {
+            "url": "/js/assets/Spanish.json"
+        },
+    }
+    );
+});
+
+
+function MostrarDatosExcel() {
+    $('#content').html('<img src="/resources/loader.gif" alt="loading" /><br/> Un momento, por favor...');
+    //console.log(result);
+    table_import.clear();
+    for (var i = 0; i < result.length; i++) {
+        //Limpiar Nulls
+        if (result[i].DESCRIPCION == null) {
+            result[i].DESCRIPCION = "";
+        }
+        table_import.row.add([
+            result[i].ID,
+            result[i].NOMBRE,
+            result[i].DESCRIPCION
+        ]).draw(false);
+    }
+    $('#content').fadeIn(1000).html(' Datos leidos');
+};
+
+
+
+
+function Save_Import() {
+
+    for (var i = 0; i < result.length; i++) {
+        $('#content').html('<img src="/resources/loader.gif" alt="loading" /><br/>Un momento, por favor...');
+        var objeto = {
+            name: result[i].NOMBRE,
+            description: result[i].DESCRIPCION
+        };
+
+
+        $.ajax({
+            url: "Category",
+            method: 'post',
+            data: objeto,
+            success: function (result) {
+                if (result.success) {
+                    //toastr.success(result.msg);
+
+                } else {
+                    toastr.warning(result.msg);
+                }
+            },
+            error: function (result) {
+                console.log(result.responseJSON.message);
+                toastr.error("CONTACTE A SU PROVEEDOR POR FAVOR.");
+            },
+        });
+        $('#content').fadeIn(1000).html('');
+        table.ajax.reload();
+    }
+    $('#modal_import').modal('hide');
+    toastr.success("Datos importados correctamente");
+
 };

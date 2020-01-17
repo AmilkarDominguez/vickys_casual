@@ -20,7 +20,7 @@ class CreateStoresTable extends Migration
             $table->enum('state', ['ACTIVO', 'INACTIVO','ELIMINADO'])->default('ACTIVO');
             $table->string('name');
             $table->text('description')->nullable();
-            $table->string('city');
+            $table->string('city')->nullable();
             $table->string('lat')->nullable();
             $table->string('lng')->nullable();
         });

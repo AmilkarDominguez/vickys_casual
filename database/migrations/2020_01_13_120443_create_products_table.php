@@ -24,13 +24,13 @@ class CreateProductsTable extends Migration
             $table->text('discount');
             $table->text('price_discount');
 
-            $table->unsignedBigInteger('id_store')->unsigned()->nullable();
-            $table->unsignedBigInteger('id_subcategory')->unsigned()->nullable();
+            $table->unsignedBigInteger('store_id')->unsigned()->nullable();
+            $table->unsignedBigInteger('subcategory_id')->unsigned()->nullable();
             //RELACTIONS
-            $table->foreign('id_store')->references('id')->on('stores')
+            $table->foreign('store_id')->references('id')->on('stores')
             ->onDelete('cascade')
             ->onUpdate('cascade');
-            $table->foreign('id_subcategory')->references('id')->on('categories')
+            $table->foreign('subcategory_id')->references('id')->on('categories')
             ->onDelete('cascade')
             ->onUpdate('cascade');
         });

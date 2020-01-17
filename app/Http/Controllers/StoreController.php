@@ -2,84 +2,77 @@
 
 namespace App\Http\Controllers;
 
-use App\Store;
 use Illuminate\Http\Request;
+use App\Store;
+use App\Http\Requests\StoreRequest;
+use Validator;
 
 class StoreController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     public function index()
     {
-        //
+        return view('admin.Store');
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
-        //
+        $rule = new StoreRequest();
+        $validator = Validator::make($request->all(), $rule->rules());
+        if ($validator->fails()) {
+            return response()->json(['success' => false, 'msg' => $validator->errors()->all()]);
+        } else {
+            Store::create($request->all());
+            return response()->json(['success' => true, 'msg' => 'Registro existoso.']);
+        }
+    }
+    public function edit(Request $request)
+    {
+        $Store = Store::find($request->id);
+        return $Store->toJson();
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Store  $store
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Store $store)
+    public function update(Request $request)
     {
-        //
+        $rule = new StoreRequest();
+        $validator = Validator::make($request->all(), $rule->rules());
+        if ($validator->fails()) {
+            return response()->json(['success' => false, 'msg' => $validator->errors()->all()]);
+        } else {
+            $Store = Store::find($request->id);
+            $Store->update($request->all());
+            return response()->json(['success' => true, 'msg' => 'Se actualizo existosamente.']);
+        }
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Store  $store
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Store $store)
+    public function destroy(Request $request)
     {
-        //
+        $Store = Store::find($request->id);
+        $Store->state = "ELIMINADO";
+        $Store->update();
+        return response()->json(['success' => true, 'msg' => 'Registro borrado.']);
+    }
+    //FUNCTIONS
+    public function datatable()
+    {
+        return datatables()->of(Store::where('state', '!=', 'ELIMINADO')->get())
+            ->addColumn('Editar', function ($item) {
+                return '<a class="btn btn-xs btn-primary text-white" onclick="Edit(' . $item->id . ')" ><i class="icon-pencil"></i></a>';
+            })
+            ->addColumn('Eliminar', function ($item) {
+                return '<a class="btn btn-xs btn-danger text-white" onclick="Delete(\'' . $item->id . '\')"><i class="icon-trash"></i></a>';
+            })
+            ->rawColumns(['Editar', 'Eliminar'])
+            ->toJson();
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Store  $store
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, Store $store)
+    public function list()
     {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Store  $store
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Store $store)
-    {
-        //
+        return Store::where('state', 'ACTIVO')->get();
     }
 }

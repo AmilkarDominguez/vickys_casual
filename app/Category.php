@@ -11,8 +11,9 @@ class Category extends Model
         'description',
         'state'
     ];
-    // public function tag()
-    // {
-    //     return $this->belongsTo(Catalogue::class);
-    // }
+
+    public function subcategories()
+    {
+        return $this->belongsToMany(Subcategory::class);
+    }
 }

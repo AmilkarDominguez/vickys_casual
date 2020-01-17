@@ -5,10 +5,8 @@ var title_modal_data = "Nueva Categoria";
 $(document).ready(function () {
     //ListDatatable();
     catch_parameters();
-    Select();
     ListDatatable();
 });
-
 
 // datatable catalogos
 function ListDatatable() {
@@ -22,12 +20,11 @@ function ListDatatable() {
             "url": "/js/assets/Spanish.json"
         },
         ajax: {
-            url: 'Subcategory_dt'
+            url: 'Store_dt'
         },
         columns: [
             { data: 'name' },
             { data: 'description' },
-            { data: 'category.name' },
             {
                 data: 'state',
                 "render": function (data, type, row) {
@@ -58,7 +55,7 @@ function ListDatatable() {
                 titleAttr: 'Excel',
                 extend: 'excel',
                 exportOptions: {
-                    columns: [0, 1, 2]
+                    columns: [0, 1]
                 }
             },
             {
@@ -67,7 +64,7 @@ function ListDatatable() {
                 titleAttr: 'PDF',
                 extend: 'pdf',
                 exportOptions: {
-                    columns: [0, 1, 2]
+                    columns: [0, 1]
                 }
             },
             {
@@ -76,7 +73,7 @@ function ListDatatable() {
                 titleAttr: 'Imprimir',
                 extend: 'print',
                 exportOptions: {
-                    columns: [0, 1, 2]
+                    columns: [0, 1]
                 }
             },
             //btn Refresh
@@ -94,7 +91,7 @@ function ListDatatable() {
 // guarda los datos nuevos
 function Save() {
     $.ajax({
-        url: "Subcategory",
+        url: "Store",
         method: 'post',
         data: catch_parameters(),
         success: function (result) {
@@ -116,7 +113,7 @@ function Save() {
 // captura los datos
 function Edit(id) {
     $.ajax({
-        url: "Subcategory/{Subcategory}/edit",
+        url: "Store/{Store}/edit",
         method: 'get',
         data: {
             id: id
@@ -138,7 +135,6 @@ function show_data(obj) {
     id = obj.id;
     $("#name").val(obj.name);
     $("#description").val(obj.description);
-    $("#category_id").val(obj.category_id);
     if (obj.state == "ACTIVO") {
         $('#state_activo').prop('checked', true);
     }
@@ -157,7 +153,7 @@ function Update() {
     var data_new = $(".form-data").serialize();
     if (data_old != data_new) {
         $.ajax({
-            url: "Subcategory/{Subcategory}",
+            url: "Store/{Store}",
             method: 'put',
             data: catch_parameters(),
             success: function (result) {
@@ -186,7 +182,7 @@ function Delete(id_) {
 }
 $("#btn_delete").click(function () {
     $.ajax({
-        url: "Subcategory/{Subcategory}",
+        url: "Store/{Store}",
         method: 'delete',
         data: {
             id: id
@@ -281,36 +277,6 @@ function ClearInputs() {
 };
 
 
-//List Select
-function Select() {
-    $.ajax({
-        url: "/Category_list",
-        method: 'get',
-        success: function (result) {
-            var code = '<div class="form-group">';
-            code += '<label><b>Categoria:</b></label>';
-            code += '<select class="form-control" name="category_id" id="category_id" required>';
-            code += '<option disabled value="" selected>(Seleccionar)</option>';
-            $.each(result, function (key, value) {
-                code += '<option value="' + value.id + '">' + value.name + '</option>';
-            });
-            code += '</select>';
-            code += '<div class="invalid-feedback">';
-            code += 'Dato necesario.';
-            code += '</div>';
-            code += '</div>';
-            $("#select_tipo").html(code);
-        },
-        error: function (result) {
-
-            toastr.error(result.msg + ' CONTACTE A SU PROVEEDOR POR FAVOR.');
-            console.log(result);
-        },
-    });
-}
-
-
-
 //Metodos para importar
 $("#btn-import").click(function () {
     table_import.clear().draw();
@@ -374,9 +340,7 @@ function MostrarDatosExcel() {
         table_import.row.add([
             result[i].ID,
             result[i].NOMBRE,
-            result[i].DESCRIPCION,
-            result[i].ID_CATEGORIA
-
+            result[i].DESCRIPCION
         ]).draw(false);
     }
     $('#content').fadeIn(1000).html(' Datos leidos');
@@ -391,13 +355,12 @@ function Save_Import() {
         $('#content').html('<img src="/resources/loader.gif" alt="loading" /><br/>Un momento, por favor...');
         var objeto = {
             name: result[i].NOMBRE,
-            description: result[i].DESCRIPCION,
-            category_id: result[i].ID_CATEGORIA
+            description: result[i].DESCRIPCION
         };
 
 
         $.ajax({
-            url: "Subcategory",
+            url: "Store",
             method: 'post',
             data: objeto,
             success: function (result) {

@@ -7,7 +7,7 @@
             <div class="card-body">
                 <div class="row">
                     <div class="col-sm-6">
-                        <h2 class="card-title text-dark">Subcategorias</h2>
+                        <h2 class="card-title text-dark">Tiendas</h2>
                     </div>
                     <div class="col-sm-6 d-flex justify-content-end">
                         <button class="btn btn-outline-primary m-1" id="btn-import">
@@ -32,7 +32,6 @@
                             <tr>
                                 <td>Nombre</td>
                                 <td>Descripción</td>
-                                <td>Categoria</td>
                                 <td>Estado</td>
                                 <td>Editar</td>
                                 <td>Eliminar</td>
@@ -47,7 +46,6 @@
 
 <!-- Modals-->
 <!-- Modal Datos -->
-
 <div class="modal fade bd-example-modal-lg" id="modal_datos" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
@@ -60,7 +58,6 @@
             <form class="form-data" id="form-data" novalidate>
                 <div class="modal-body">
                     <div class="modal-body">
-                        <div class="md-form mb-3" id="select_tipo"></div>
                         <div class="md-form mb-3">
                             <label><b>Nombre:</b></label>
                             <textarea type="text" class="form-control" rows="4" id="name" name="name" placeholder="Nombre" required></textarea>
@@ -119,6 +116,7 @@
     </div>
 </div>
 
+
 <!-- Modal Importar -->
 <div class="modal fade bd-example-modal-lg" id="modal_import" tabindex="-1" role="dialog">
     <div class="modal-dialog modal-lg">
@@ -150,7 +148,6 @@
                                     <th>ID</th>
                                     <th>NOMBRE</th>
                                     <th>DESCRIPCION</th>
-                                    <th>ID_CATEGORIA</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -173,7 +170,9 @@
         </div>
     </div>
 </div>
+
+
 @endsection
 @section('scripts')
-<script src="{{ URL::asset('js/scripts/subcategory.js') }}"></script>
+<script src="{{ URL::asset('js/scripts/store.js') }}"></script>
 @endsection

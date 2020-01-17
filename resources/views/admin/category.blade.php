@@ -10,7 +10,10 @@
                         <h2 class="card-title text-dark">Categorias</h2>
                     </div>
                     <div class="col-sm-6 d-flex justify-content-end">
-                        <button class="btn btn-outline-success" id="btn-agregar">
+                        <button class="btn btn-outline-primary m-1" id="btn-import">
+                            <i class="icon-file-excel"></i>&nbsp;Importar
+                        </button>
+                        <button class="btn btn-outline-success m-1" id="btn-agregar">
                             <i class="icon-plus"></i>&nbsp;Agregar
                         </button>
                     </div>
@@ -43,7 +46,6 @@
 
 <!-- Modals-->
 <!-- Modal Datos -->
-
 <div class="modal fade bd-example-modal-lg" id="modal_datos" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
@@ -114,10 +116,63 @@
     </div>
 </div>
 
+
+<!-- Modal Importar -->
+<div class="modal fade bd-example-modal-lg" id="modal_import" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Importar Datos </h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="modal-body">
+                    <p>
+                        <span class="text-warning"><i class="icon-attention"></i><b>Importante:</b></span>
+                        Utilice la plantilla para importar los datos.
+                        <a href="/resources/templates/categoria.xlsx" download>Descargar plantilla</a>
+                    </p>
+
+                    <p class="text-primary" id="content"></p>
+                    <div class="form-group">
+                        <input type="file" class="form-control-file" id="files" name="files">
+                    </div>
+                    <button id="btn_show_import" class="btn btn-info" onclick="MostrarDatosExcel();">Mostrar<i class="icon-eye"></i></button>
+                    <div id="DatosExcel" align="center" style="padding-top: 10px">
+
+                        <table id="table_import" class="table table-bordered" style="width:100%">
+                            <thead class="thead-dark">
+                                <tr>
+                                    <th>ID</th>
+                                    <th>NOMBRE</th>
+                                    <th>DESCRIPCION</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <!-- <tr>
+                                    <td>1</td>
+                                    <td>Customer Support</td>
+                                    <td>New York</td>
+                                </tr> -->
+                            </tbody>
+                        </table>
+
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar<i class="icon-cancel"></i></button>
+                <button class="btn btn-success" onclick="Save_Import();">Aceptar<i class="icon-ok"></i></button>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
 @endsection
 @section('scripts')
-<script>
-    var user_id={{ Auth::user()->id }};
-</script>
 <script src="{{ URL::asset('js/scripts/category.js') }}"></script>
 @endsection

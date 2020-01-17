@@ -17,15 +17,15 @@ class CreateSubcategoriesTable extends Migration
             $table->bigIncrements('id');
             $table->timestamps();
 
-            $table->enum('state', ['ACTIVO', 'INACTIVO','ELIMINADO'])->default('ACTIVO');
+            $table->enum('state', ['ACTIVO', 'INACTIVO', 'ELIMINADO'])->default('ACTIVO');
             $table->string('name');
             $table->text('description')->nullable();
 
-            $table->unsignedBigInteger('id_category')->unsigned()->nullable();
+            $table->unsignedBigInteger('category_id')->unsigned()->nullable();
             //RELACTIONS
-            $table->foreign('id_category')->references('id')->on('categories')
-            ->onDelete('cascade')
-            ->onUpdate('cascade');
+            $table->foreign('category_id')->references('id')->on('categories')
+                ->onDelete('cascade')
+                ->onUpdate('cascade');
         });
     }
 
