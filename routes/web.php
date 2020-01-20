@@ -17,6 +17,11 @@ Route::get('/', function () {
 
 Auth::routes();
 
+
+//Route::post('acceso', 'Auth\LoginController@loginsample')->name('acceso');
+
+Route::post('/entrar', 'AuthenticareSample@login')->name('entrar');;
+
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/cpanel', 'AdminController@cpanel')->name('cpanel');
 

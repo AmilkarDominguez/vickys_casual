@@ -10,17 +10,15 @@
 
 
 
-<form class="form-signin">
-
+<form class="form-signin" method="POST" action="{{ route('entrar') }}">
+    @csrf
         <img class="mb-4" src="resources/vc.png" alt="" width="250">
         <h1 class="h3 mb-3 font-weight-normal">REGÍSTRATE</h1>
 
         <label for="inputEmail" class="sr-only">celular</label>
-        <input type="number" id="inputEmail" class="form-control" placeholder="celular" required autofocus>
+        <input type="number" id="telephone" class="form-control  @error('telephone') is-invalid @enderror" name="telephone" placeholder="celular" value="{{ old('telephone') }}" required autofocus>
         <label for="inputPassword" class="sr-only">contraseña</label>
-        <input type="password" id="inputPassword" class="form-control" placeholder="contraseña" required>
-
-
+        <input type="password" id="password" class="form-control @error('password') is-invalid @enderror" name="password" placeholder="contraseña" required>
         <div class="d-flex flex-row bd-highlight mb-3">
             <div class="p-2 bd-highlight">
                 <div class="checkbox">
@@ -32,7 +30,8 @@
                 </div>
             </div>
         </div>
-        <a class="btn btn-lg bg-white btn-block text-dark" href="{{ route('activity.index') }}" >Log in</a>
+        {{-- <a class="btn btn-lg bg-white btn-block text-dark" type="submit">Log in</a>> --}}
+        <button class="btn btn-lg bg-white btn-block text-dark" type="submit">Log in</button>
         <a href="{{url('/redirect')}}"  style="margin-top: 15px;" class="btn btn-lg bg-white btn-block"><i class="fab fa-facebook"></i>Registrate con facebook</a>
         <!-- <p class="mt-5 mb-3 text-muted">&copy; 2020</p> -->
 
