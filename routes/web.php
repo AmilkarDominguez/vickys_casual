@@ -23,7 +23,7 @@ Auth::routes();
 Route::post('/entrar', 'AuthenticareSample@login')->name('entrar');;
 
 Route::get('/home', 'HomeController@index')->name('home');
-Route::get('/cpanel', 'AdminController@cpanel')->name('cpanel');
+Route::get('/admin', 'AdminController@admin')->name('admin');
 
 Route::get('/redirect', 'SocialAuthFacebookController@redirect');
 Route::get('/callback', 'SocialAuthFacebookController@callback');

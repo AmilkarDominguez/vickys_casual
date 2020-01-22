@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 
 class AdminController extends Controller
 {
-    public function cpanel()
+    public function admin()
     {
         return view('admin.login');
     }
