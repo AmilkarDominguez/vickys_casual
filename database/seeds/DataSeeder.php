@@ -30,7 +30,16 @@ class DataSeeder extends Seeder
             'name' => 'admin',
             'rol' => 'ADMIN',
             'email'=> 'admin@admin.com',
-            'password' => bcrypt('admin'),    
+            'password' => bcrypt('bytemo852456'),    
+        ]);
+        $admin = App\User::create([
+            'email_verified_at' => now(),
+            'remember_token' => str_random(10),
+            'state' => 'ACTIVO',
+            'name' => 'admin',
+            'rol' => 'ADMIN',
+            'email'=> 'appconsulta@vickyscasual.com',
+            'password' => bcrypt('cnslt.963Vc'),    
         ]);
     }
 }
