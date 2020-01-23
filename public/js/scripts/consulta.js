@@ -13,7 +13,7 @@ function getLocation() {
     if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(showPosition);
     } else {
-        x.innerHTML = "Tu navegador no soporta.";
+        toastr.warning("No es posible acceder a tu ubicación");
     }
 }
 
@@ -21,11 +21,11 @@ function showPosition(position) {
     x.innerHTML = "Latitude: " + position.coords.latitude.toFixed(redondeo) +
         "<br>Longitude: " + position.coords.longitude.toFixed(redondeo);
 
-    var lat = position.coords.latitude.toFixed(redondeo);
-    var lng = position.coords.longitude.toFixed(redondeo);
+    lat = position.coords.latitude.toFixed(redondeo);
+    lng = position.coords.longitude.toFixed(redondeo);
 
-    console.log(lat);
-    console.log(lng);
+    // console.log(lat);
+    // console.log(lng);
 
 
 }
@@ -41,6 +41,8 @@ function consultarBarcode(barcode_readed) {
     var obj = {
         user_id: user_id,
         barcode: barcode_readed,
+        lat: lat,
+        lng: lng,
     };
 
     $.ajax({
@@ -50,15 +52,26 @@ function consultarBarcode(barcode_readed) {
         success: function (result) {
             if (result.success) {
                 //console.log(result);
-                toastr.success(result.msg);
 
-                AddBasket(result.obj);
+                //Verificar ubicaci
+                var lat_ =  parseFloat(result.obj.store.lat);
+                var lng_ =parseFloat(result.obj.store.lng);
+
+                //console.log(lat_);
+                //console.log(lng_);
+
+                if (true) {
+                    toastr.success(result.msg);
+                    AddBasket(result.obj);
+                } else {
+                    toastr.warning("No se encontraron registros coincidentes");
+                }
 
             } else {
                 //console.log(result);
                 toastr.warning(result.msg);
             }
-            
+
 
             // console.log(result);
             // $.each(result, function (key, value) {
@@ -74,21 +87,21 @@ function consultarBarcode(barcode_readed) {
     });
 
 }
-var total=0;
-function AddBasket(obj){
+var total = 0;
+function AddBasket(obj) {
     Basket.push(obj);
-    console.log("CARRITO!");
-    console.log(obj);
+    //console.log("CARRITO!");
+    //console.log(obj);
 
     var code = '<tr id="tr' + row_index + '">';
-    code += '<td>' + obj[0].name + '</td>';
+    code += '<td>' + obj.name + '</td>';
     code += '<td>';
-    code += '<span>Precio: ' + obj[0].price + '</span><br>';
-    code += '<span>Descuento: ' + obj[0].discount + ' %</span><br>';
-    code += '<span>Precio con descuento: ' + obj[0].price_discount + '</span>';
+    code += '<span>Precio: ' + obj.price + '</span><br>';
+    code += '<span>Descuento: ' + obj.discount + ' %</span><br>';
+    code += '<span>Precio con descuento: ' + obj.price_discount + '</span>';
     code += '</td>';
-    
-    code += '<td><a class="btn btn-danger text-white" onclick="RemoveBasket(' + row_index + ',' + obj[0].id + ','+obj[0].price_discount+')">X</a></td>';
+
+    code += '<td><a class="btn btn-danger text-white" onclick="RemoveBasket(' + row_index + ',' + obj.id + ',' + obj.price_discount + ')">X</a></td>';
 
     code += '</tr>'
     $('#table-basket').append(code);
@@ -97,7 +110,7 @@ function AddBasket(obj){
     //Sumar Total
 
 
-    total = total+parseFloat(obj[0].price_discount);
+    total = total + parseFloat(obj.price_discount);
     $('#total').html(total);
 }
 
@@ -109,6 +122,6 @@ function RemoveBasket(row_i, id, price) {
 
 
     //Restar Total
-    total = total-parseFloat(price);
+    total = total - parseFloat(price);
     $('#total').html(total);
 }

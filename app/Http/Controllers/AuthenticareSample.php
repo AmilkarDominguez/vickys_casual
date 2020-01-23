@@ -29,7 +29,8 @@ class AuthenticareSample extends Controller
         if (!empty($user)) {
             if (Hash::check($request->password, $user['password']))
             {
-                Auth::login($user);
+                // Auth::login($user);
+                auth()->login($user);
                 return view('Consulta');
             }
             else {

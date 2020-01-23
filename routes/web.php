@@ -30,8 +30,8 @@ Route::get('/admin', 'AdminController@admin')->name('admin');
 Route::get('/redirect', 'SocialAuthFacebookController@redirect');
 Route::get('/callback', 'SocialAuthFacebookController@callback');
 
-Route::resource('activity', 'ActivityController');
-Route::get('activity_datatable', 'ActivityController@datatable');
+Route::resource('Activity', 'ActivityController')->middleware('auth');
+Route::get('Activity_dt', 'ActivityController@datatable')->middleware('auth');
 
 
 //Admin CPANEL

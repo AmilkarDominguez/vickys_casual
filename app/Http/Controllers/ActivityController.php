@@ -2,8 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use App\Activity;
 use Illuminate\Http\Request;
+use App\Activity;
+use App\Http\Requests\ActivityRequest;
+use Validator;
+use Auth;
+use App\User;
+
 
 class ActivityController extends Controller
 {
@@ -16,73 +21,68 @@ class ActivityController extends Controller
     {
         return view('Consulta');
     }
+
     public function index()
     {
-        return view('Activity');
-    }
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
+        if (Auth::user()->rol == 'ADMIN') {
+            return view('admin.Activity');
+        } else {
+            return view('Consulta');
+        }
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
-        //
+        $rule = new ActivityRequest();
+        $validator = Validator::make($request->all(), $rule->rules());
+        if ($validator->fails()) {
+            return response()->json(['success' => false, 'msg' => $validator->errors()->all()]);
+        } else {
+            Activity::create($request->all());
+            return response()->json(['success' => true, 'msg' => 'Registro existoso.']);
+        }
+    }
+    public function edit(Request $request)
+    {
+        $Activity = Activity::find($request->id);
+        return $Activity->toJson();
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Activity  $activity
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Activity $activity)
+    public function update(Request $request)
     {
-        //
+        $rule = new ActivityRequest();
+        $validator = Validator::make($request->all(), $rule->rules());
+        if ($validator->fails()) {
+            return response()->json(['success' => false, 'msg' => $validator->errors()->all()]);
+        } else {
+            $Activity = Activity::find($request->id);
+            $Activity->update($request->all());
+            return response()->json(['success' => true, 'msg' => 'Se actualizo existosamente.']);
+        }
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Activity  $activity
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Activity $activity)
+    public function destroy(Request $request)
     {
-        //
+        $Activity = Activity::find($request->id);
+        $Activity->state = "ELIMINADO";
+        $Activity->update();
+        return response()->json(['success' => true, 'msg' => 'Registro borrado.']);
     }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Activity  $activity
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, Activity $activity)
+    //FUNCTIONS
+    public function datatable()
     {
-        //
+        return datatables()->of(Activity::where('state', '!=', 'ELIMINADO')->with('user', 'product')->get())
+            ->addColumn('Editar', function ($item) {
+                return '<a class="btn btn-xs btn-primary text-white" onclick="Edit(' . $item->id . ')" ><i class="icon-pencil"></i></a>';
+            })
+            ->addColumn('Eliminar', function ($item) {
+                return '<a class="btn btn-xs btn-danger text-white" onclick="Delete(\'' . $item->id . '\')"><i class="icon-trash"></i></a>';
+            })
+            ->rawColumns(['Editar', 'Eliminar'])
+            ->toJson();
     }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Activity  $activity
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Activity $activity)
+    public function list()
     {
-        //
+        return Activity::where('state', 'ACTIVO')->get();
     }
 }

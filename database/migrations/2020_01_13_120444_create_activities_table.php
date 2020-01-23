@@ -16,6 +16,16 @@ class CreateActivitiesTable extends Migration
         Schema::create('activities', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->timestamps();
+            $table->enum('state', ['ACTIVO', 'INACTIVO','ELIMINADO'])->default('ACTIVO');
+            $table->unsignedBigInteger('user_id')->unsigned();
+            $table->unsignedBigInteger('product_id')->unsigned();
+            //RELACTIONS
+            $table->foreign('user_id')->references('id')->on('users')
+            ->onDelete('cascade')
+            ->onUpdate('cascade');
+            $table->foreign('product_id')->references('id')->on('products')
+            ->onDelete('cascade')
+            ->onUpdate('cascade');
         });
     }
 

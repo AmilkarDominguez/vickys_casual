@@ -66,7 +66,7 @@
                             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownAdministracion" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <i class="icon-sliders"></i>Parametros
                             </a>
-                            <div class="dropdown-menu" aria-labelledby="navbarDropdownAdministracion">                                
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdownAdministracion">
                                 <a class="dropdown-item" href="{{ route('Category.index') }}">Categorias</a>
                                 <a class="dropdown-item" href="{{ route('Subcategory.index') }}">Sub categorias</a>
                                 <div class="dropdown-divider"></div>
@@ -83,9 +83,7 @@
                                 <i class="icon-download"></i>Reportes
                             </a>
                             <div class="dropdown-menu" aria-labelledby="navbarDropdownReportes">
-                            <a class="dropdown-item" href="{{ route('Category.index') }}">Usuarios registrados</a>
-                                <a class="dropdown-item" href="">¿?</a>
-                            </div>
+                                <a class="dropdown-item" href="{{ route('Activity.index') }}">Consultas registradas</a>
                         </li>
                         @endif
                         <li class="nav-item dropdown">
@@ -95,7 +93,7 @@
                             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
                                 <!--<a class="dropdown-item" href="!#">Cambiar contraseña</a>-->
                                 <a class="dropdown-item"><i class="icon-user"></i>Tipo: {{ Auth::user()->rol }}</a>
-                                
+
                                 <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
                                     {{ __('Salir') }}
@@ -137,14 +135,14 @@
     <script src="{{ asset('js/assets/moment.js') }}"></script>
     <script src="{{ asset('js/assets/es.js') }}"></script>
     <script src="{{ asset('js/assets/tempusdominus-bootstrap-4.js') }}"></script>
-    
+
     <!--Read XLS-->
     <script src="{{ asset('js/assets/xlsx.core.min.js') }}"></script>
 
     <script src="{{ asset('js/scripts/main.js') }}"></script>
 
     <script>
-        var user_id={{ Auth::user()->id }};
+        var user_id = {{Auth::user()->id}};
     </script>
     @yield('scripts')
 </body>

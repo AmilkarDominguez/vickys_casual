@@ -67,9 +67,6 @@
     <script src="{{ asset('js/scripts/main.js') }}"></script>
     <!-- Scripts -->
     <!-- <script src="{{ asset('js/app.js') }}" defer></script> -->
-    <script>
-        var user_id={{ Auth::user()->id }};
-    </script>
     @yield('scripts')
 </body>
 
