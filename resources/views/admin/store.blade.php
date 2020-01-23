@@ -178,7 +178,7 @@
                     </div>
                     <button id="btn_show_import" class="btn btn-info" onclick="MostrarDatosExcel();">Mostrar<i class="icon-eye"></i></button>
                     <div id="DatosExcel" align="center" style="padding-top: 10px">
-
+                        <div class="table-responsive">
                         <table id="table_import" class="table table-bordered" style="width:100%">
                             <thead class="thead-dark">
                                 <tr>
@@ -198,7 +198,7 @@
                                 </tr> -->
                             </tbody>
                         </table>
-
+                    </div>
                     </div>
                 </div>
             </div>

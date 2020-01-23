@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use App\Category;
 use App\Http\Requests\CategoryRequest;
 use Validator;
+use Auth;
+use App\User;
 
 class CategoryController extends Controller
 {
@@ -17,7 +19,12 @@ class CategoryController extends Controller
 
     public function index()
     {
-        return view('admin.Category');
+        if(Auth::user()->rol=='ADMIN'){
+            return view('admin.Category');
+        }
+        else {
+            return view('Consulta');
+        }
     }
 
     public function store(Request $request)

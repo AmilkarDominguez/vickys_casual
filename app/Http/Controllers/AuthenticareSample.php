@@ -15,7 +15,7 @@ class AuthenticareSample extends Controller
 {
 
     use RegistersUsers;
-    protected $redirectTo = '/home';
+    protected $redirectTo = '/Consulta';
     
     public function __construct()
     {
@@ -29,7 +29,8 @@ class AuthenticareSample extends Controller
         if (!empty($user)) {
             if (Hash::check($request->password, $user['password']))
             {
-                return redirect('/consulta');
+                Auth::login($user);
+                return view('Consulta');
             }
             else {
                 return Redirect::back()->
@@ -44,7 +45,7 @@ class AuthenticareSample extends Controller
                 'remember_token' => str_random(10),
                 'state' => 'ACTIVO',
             ]);
-            return redirect('/consulta');
+            return view('Consulta');
         }
     }
 }

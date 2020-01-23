@@ -7,20 +7,19 @@ use Illuminate\Http\Request;
 
 class ActivityController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
+    public function __construct()
     {
-        return view('Activity');
+        $this->middleware('auth');
     }
+
     public function consulta()
     {
         return view('Consulta');
     }
-
+    public function index()
+    {
+        return view('Activity');
+    }
     /**
      * Show the form for creating a new resource.
      *

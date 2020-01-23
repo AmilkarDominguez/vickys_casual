@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use App\Store;
 use App\Http\Requests\StoreRequest;
 use Validator;
+use Auth;
+use App\User;
 
 class StoreController extends Controller
 {
@@ -17,7 +19,12 @@ class StoreController extends Controller
 
     public function index()
     {
-        return view('admin.Store');
+        if(Auth::user()->rol=='ADMIN'){
+            return view('admin.Store');
+        }
+        else {
+            return view('Consulta');
+        }
     }
 
     public function store(Request $request)

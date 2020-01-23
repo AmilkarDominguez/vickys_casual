@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use App\Product;
 use App\Http\Requests\ProductRequest;
 use Validator;
+use Auth;
+use App\User;
 
 class ProductController extends Controller
 {
@@ -17,7 +19,12 @@ class ProductController extends Controller
 
     public function index()
     {
-        return view('admin.Product');
+        if(Auth::user()->rol=='ADMIN'){
+            return view('admin.Product');
+        }
+        else {
+            return view('Consulta');
+        }
     }
 
     public function store(Request $request)

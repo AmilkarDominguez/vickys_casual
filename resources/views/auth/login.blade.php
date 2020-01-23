@@ -10,7 +10,7 @@
 
 
 
-<form class="form-signin" method="POST" action="{{ route('entrar') }}">
+<form class="form-signin" method="POST" action="{{ route('vc_consulta') }}">
     @csrf
         <img class="mb-4" src="resources/vc.png" alt="" width="250">
         <h1 class="h3 mb-3 font-weight-normal">REGÍSTRATE</h1>

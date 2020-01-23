@@ -72,8 +72,8 @@
                                 <div class="dropdown-divider"></div>
                                 <a class="dropdown-item" href="{{ route('Store.index') }}">Sucursales</a>
                                 <a class="dropdown-item" href="{{ route('Product.index') }}">Productos</a>
-                                <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" href="{{ route('Subcategory.index') }}">Tiendas</a>
+                                {{-- <div class="dropdown-divider"></div>
+                                <a class="dropdown-item" href="{{ route('Subcategory.index') }}">Tiendas</a> --}}
                             </div>
                         </li>
                         @endif

@@ -6,7 +6,8 @@ use Illuminate\Http\Request;
 use App\Subcategory;
 use App\Http\Requests\SubcategoryRequest;
 use Validator;
-
+use Auth;
+use App\User;
 class SubcategoryController extends Controller
 {
 
@@ -17,7 +18,13 @@ class SubcategoryController extends Controller
 
     public function index()
     {
-        return view('admin.Subcategory');
+
+        if(Auth::user()->rol=='ADMIN'){
+            return view('admin.Subcategory');
+        }
+        else {
+            return view('Consulta');
+        }
     }
 
     public function store(Request $request)
