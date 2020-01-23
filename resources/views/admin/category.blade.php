@@ -60,7 +60,7 @@
                     <div class="modal-body">
                         <div class="md-form mb-3">
                             <label><b>Nombre:</b></label>
-                            <textarea type="text" class="form-control" rows="4" id="name" name="name" placeholder="Nombre" required></textarea>
+                            <input type="text" class="form-control" rows="4" id="name" name="name" placeholder="Nombre" required/>
                             <div class="invalid-feedback">
                                 Dato necesario.
                             </div>
@@ -141,7 +141,7 @@
                     </div>
                     <button id="btn_show_import" class="btn btn-info" onclick="MostrarDatosExcel();">Mostrar<i class="icon-eye"></i></button>
                     <div id="DatosExcel" align="center" style="padding-top: 10px">
-
+                        <div class="table-responsive">
                         <table id="table_import" class="table table-bordered" style="width:100%">
                             <thead class="thead-dark">
                                 <tr>
@@ -158,7 +158,7 @@
                                 </tr> -->
                             </tbody>
                         </table>
-
+                    </div>
                     </div>
                 </div>
             </div>

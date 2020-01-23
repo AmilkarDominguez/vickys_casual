@@ -70,4 +70,8 @@ class SubcategoryController extends Controller
             ->rawColumns(['Editar', 'Eliminar'])
             ->toJson();
     }
+    public function list()
+    {
+        return Subcategory::where('state', 'ACTIVO')->get();
+    }
 }

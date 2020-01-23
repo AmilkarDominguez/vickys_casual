@@ -70,8 +70,8 @@
                                 <a class="dropdown-item" href="{{ route('Category.index') }}">Categorias</a>
                                 <a class="dropdown-item" href="{{ route('Subcategory.index') }}">Sub categorias</a>
                                 <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" href="{{ route('Store.index') }}">Tiendas</a>
-                                <a class="dropdown-item" href="{{ route('Subcategory.index') }}">Productos</a>
+                                <a class="dropdown-item" href="{{ route('Store.index') }}">Sucursales</a>
+                                <a class="dropdown-item" href="{{ route('Product.index') }}">Productos</a>
                                 <div class="dropdown-divider"></div>
                                 <a class="dropdown-item" href="{{ route('Subcategory.index') }}">Tiendas</a>
                             </div>

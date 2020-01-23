@@ -7,7 +7,7 @@
             <div class="card-body">
                 <div class="row">
                     <div class="col-sm-6">
-                        <h2 class="card-title text-dark">Subcategorias</h2>
+                        <h2 class="card-title text-dark">Productos</h2>
                     </div>
                     <div class="col-sm-6 d-flex justify-content-end">
                         <button class="btn btn-outline-primary m-1" id="btn-import">
@@ -31,8 +31,12 @@
                         <thead>
                             <tr>
                                 <td>Nombre</td>
-                                <td>Descripción</td>
-                                <td>Categoria</td>
+                                <td>Código</td>
+                                <td>Precio</td>
+                                <td>Descuento (%)</td>
+                                <td>Precio con descuento</td>
+                                <td>Tienda</td>
+                                <td>Subcategoria</td>
                                 <td>Estado</td>
                                 <td>Editar</td>
                                 <td>Eliminar</td>
@@ -60,7 +64,8 @@
             <form class="form-data" id="form-data" novalidate>
                 <div class="modal-body">
                     <div class="modal-body">
-                        <div class="md-form mb-3" id="select_tipo"></div>
+                        <div class="md-form mb-3" id="select_tienda"></div>
+                        <div class="md-form mb-3" id="select_subcategoria"></div>
                         <div class="md-form mb-3">
                             <label><b>Nombre:</b></label>
                             <input type="text" class="form-control" rows="4" id="name" name="name" placeholder="Nombre" required/>
@@ -69,8 +74,22 @@
                             </div>
                         </div>
                         <div class="md-form mb-3">
-                            <label><b>Descripción:</b></label>
-                            <textarea type="text" class="form-control" rows="4" id="description" name="description" placeholder="Descripción" required></textarea>
+                            <label><b>Código:</b></label>
+                            <input type="text" class="form-control" rows="4" id="barcode" name="barcode" placeholder="Código" required/>
+                            <div class="invalid-feedback">
+                                Dato necesario.
+                            </div>
+                        </div>
+                        <div class="md-form mb-3">
+                            <label><b>Precio:</b></label>
+                            <input type="text" class="form-control" rows="4" id="price" name="price" placeholder="Precio" required/>
+                            <div class="invalid-feedback">
+                                Dato necesario.
+                            </div>
+                        </div>
+                        <div class="md-form mb-3">
+                            <label><b>Descuento (%):</b></label>
+                            <input type="number" class="form-control" rows="4" id="discount" name="discount" placeholder="Descuento" required/>
                             <div class="invalid-feedback">
                                 Dato necesario.
                             </div>
@@ -134,7 +153,7 @@
                     <p>
                         <span class="text-warning"><i class="icon-attention"></i><b>Importante:</b></span>
                         Utilice la plantilla para importar los datos.
-                        <a href="/resources/templates/subcategoria.xlsx" download>Descargar plantilla</a>
+                        <a href="/resources/templates/producto.xlsx" download>Descargar plantilla</a>
                     </p>
 
                     <p class="text-primary" id="content"></p>
@@ -148,9 +167,15 @@
                             <thead class="thead-dark">
                                 <tr>
                                     <th>ID</th>
+                                    <th>BAR_CODE</th>
                                     <th>NOMBRE</th>
-                                    <th>DESCRIPCION</th>
-                                    <th>ID_CATEGORIA</th>
+                                    <th>PRECIO</th>
+                                    <th>DESCUENTO</th>
+                                    <th>ID_SUCURSAL</th>
+                                    <th>SUCURSAL</th>
+                                    <th>ID_SUBCATEGORIA</th>
+                                    <th>SUBCATEGORIA</th>
+
                                 </tr>
                             </thead>
                             <tbody>
@@ -175,5 +200,5 @@
 </div>
 @endsection
 @section('scripts')
-<script src="{{ URL::asset('js/scripts/subcategory.js') }}"></script>
+<script src="{{ URL::asset('js/scripts/product.js') }}"></script>
 @endsection

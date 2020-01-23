@@ -29,7 +29,7 @@ class AuthenticareSample extends Controller
         if (!empty($user)) {
             if (Hash::check($request->password, $user['password']))
             {
-                return redirect('/activity');
+                return redirect('/consulta');
             }
             else {
                 return Redirect::back()->
@@ -44,7 +44,7 @@ class AuthenticareSample extends Controller
                 'remember_token' => str_random(10),
                 'state' => 'ACTIVO',
             ]);
-            return redirect('/activity');
+            return redirect('/consulta');
         }
     }
 }

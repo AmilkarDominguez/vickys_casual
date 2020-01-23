@@ -16,6 +16,10 @@ class ActivityController extends Controller
     {
         return view('Activity');
     }
+    public function consulta()
+    {
+        return view('Consulta');
+    }
 
     /**
      * Show the form for creating a new resource.

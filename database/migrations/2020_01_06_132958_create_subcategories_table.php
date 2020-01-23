@@ -24,8 +24,8 @@ class CreateSubcategoriesTable extends Migration
             $table->unsignedBigInteger('category_id')->unsigned()->nullable();
             //RELACTIONS
             $table->foreign('category_id')->references('id')->on('categories')
-                ->onDelete('cascade')
-                ->onUpdate('cascade');
+            ->onDelete('cascade')
+            ->onUpdate('cascade');
         });
     }
 
