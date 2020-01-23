@@ -19,9 +19,9 @@ class CreateProductsTable extends Migration
             $table->enum('state', ['ACTIVO', 'INACTIVO','ELIMINADO'])->default('ACTIVO');
             $table->text('name');
             $table->text('barcode');
-            $table->text('price');
-            $table->text('discount');
-            $table->text('price_discount');
+            $table->decimal('price',8,2);
+            $table->decimal('discount',8,2);
+            $table->decimal('price_discount',8,2);
             $table->unsignedBigInteger('store_id')->unsigned();
             $table->unsignedBigInteger('subcategory_id')->unsigned();
             //RELACTIONS

@@ -15,9 +15,9 @@
 
     <!-- Styles -->
 
- 
+
     @yield('styles')
-    
+
     <style>
         .bd-placeholder-img {
             font-size: 1.125rem;
@@ -44,6 +44,8 @@
 
     <script src="https://kit.fontawesome.com/d28e5f8122.js" crossorigin="anonymous"></script>
 
+    <link rel="stylesheet" href="{{ asset('css/toastr.css') }}">
+
     <link rel="shortcut icon" href="resources/vc.ico">
     <meta name="theme-color" content="#000000" />
 
@@ -54,12 +56,20 @@
 
     @yield('content')
 
-    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"></script>
+    <script src="{{ asset('js/assets/jquery-3.3.1.js') }}"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
 
+
+    <!--Alert-->
+    <script src="{{ asset('js/assets/toastr.js') }}"></script>
+
+    <script src="{{ asset('js/scripts/main.js') }}"></script>
     <!-- Scripts -->
     <!-- <script src="{{ asset('js/app.js') }}" defer></script> -->
+    <script>
+        var user_id={{ Auth::user()->id }};
+    </script>
     @yield('scripts')
 </body>
 

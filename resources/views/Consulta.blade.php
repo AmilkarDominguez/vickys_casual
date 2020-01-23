@@ -41,21 +41,14 @@
         Consulta aquí precios y descuentos
     </a> -->
 
-    <div id="button-layer">
-        <button id="btnAction" onClick="locate()">My Current Location</button>
-    </div>
-    <div id="map-layer"></div>
+
+
+    <p hidden id="position"></p>
 
 
 
     <section id="container" class="container">
-
-
-
         <div class="controls">
-
-
-
             <fieldset class="input-group">
 
                 <label for="file-upload" class="custom-file-upload">
@@ -127,6 +120,26 @@
         </div>
         <!-- <div id="interactive" class="viewport"></div>
         <div id="debug" class="detection"></div> -->
+
+        <div class="row">
+            <div class="col-md-12">
+                <div class="table-responsive">
+                    <table id="table-basket" class="table table-striped">
+                        <thead>
+                            <tr class="bg-black text-white">
+                                <td>Nombre</td>
+                                <td>Precio</td>
+                                <td>Quitar</td>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        </tbody>
+                    </table>
+                    <p class="bg-black text-white">Total <b id="total">0</b></p>
+                </div>
+            </div>
+        </div>
+
     </section>
 
 
@@ -143,38 +156,8 @@
 <script src="{{ asset('js/quagga.js') }}"></script>
 <script src="{{ asset('js/file_input.js') }}"></script>
 
-<script src="{{ asset('js/position.js') }}"></script>
+<script src="{{ asset('js/scripts/consulta.js') }}"></script>
 
 
-<script
-	src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBWPxfjtMvsyfmvv0imbVcJjxDDpuQ443E;&callback=initMap"
-	async defer></script>
-<script type="text/javascript">
-var map;
-function initMap() {
-	var mapLayer = document.getElementById("map-layer");
-	var centerCoordinates = new google.maps.LatLng(37.6, -95.665);
-	var defaultOptions = { center: centerCoordinates, zoom: 4 }
-
-	map = new google.maps.Map(mapLayer, defaultOptions);
-}
-
-function locate(){
-	document.getElementById("btnAction").disabled = true;
-	document.getElementById("btnAction").innerHTML = "Processing...";
-	if ("geolocation" in navigator){
-		navigator.geolocation.getCurrentPosition(function(position){ 
-			var currentLatitude = position.coords.latitude;
-			var currentLongitude = position.coords.longitude;
-
-			var infoWindowHTML = "Latitude: " + currentLatitude + "<br>Longitude: " + currentLongitude;
-			var infoWindow = new google.maps.InfoWindow({map: map, content: infoWindowHTML});
-			var currentLocation = { lat: currentLatitude, lng: currentLongitude };
-			infoWindow.setPosition(currentLocation);
-			document.getElementById("btnAction").style.display = 'none';
-		});
-	}
-}
-</script>
 
 @endsection

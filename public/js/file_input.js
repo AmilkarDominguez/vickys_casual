@@ -1,3 +1,6 @@
+var barcode_readed=0;
+
+
 $(function() {
     var App = {
         init: function() {
@@ -178,9 +181,14 @@ $(function() {
             $node,
             canvas = Quagga.canvas.dom.image;
 
-        $node = $('<li><div class="thumbnail"><div class="imgWrapper"><img class="imgScan"  /></div><div class="caption"><h3 class="code"></h3></div></div></li>');
+        $node = $('<li><div hidden class="thumbnail"><div class="imgWrapper"><img class="imgScan"  /></div><div class="caption"><h3 class="code"></h3></div></div></li>');
         $node.find("img").attr("src", canvas.toDataURL());
         $node.find("h3.code").html(code);
         $("#result_strip ul.thumbnails").prepend($node);
+
+        $('#file-upload').val("");
+        barcode_readed=code;
+
+        consultarBarcode(barcode_readed);
     });
 });
