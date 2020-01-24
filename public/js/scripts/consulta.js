@@ -81,6 +81,7 @@ function consultarBarcode(barcode_readed) {
 
         },
         error: function (result) {
+            toastr.warning("No se encontraron registros coincidentes");
             console.log(result);
         },
 

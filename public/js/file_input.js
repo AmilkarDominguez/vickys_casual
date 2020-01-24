@@ -181,7 +181,7 @@ $(function() {
             $node,
             canvas = Quagga.canvas.dom.image;
 
-        $node = $('<li><div hidden class="thumbnail"><div class="imgWrapper"><img class="imgScan"  /></div><div class="caption"><h3 class="code"></h3></div></div></li>');
+        $node = $('<li><div class="thumbnail"><div class="imgWrapper"><img class="imgScan"  /></div><div class="caption"><h3 class="code"></h3></div></div></li>');
         $node.find("img").attr("src", canvas.toDataURL());
         $node.find("h3.code").html(code);
         $("#result_strip ul.thumbnails").prepend($node);

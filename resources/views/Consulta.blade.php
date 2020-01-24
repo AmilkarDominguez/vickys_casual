@@ -158,9 +158,10 @@
 <!-- <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBvz_UKeOLY0eG2D5Gr_kuT9K7xwKAwB6E"></script> -->
 <script src="{{ asset('js/modernizr.custom.86080.js') }}"></script>
 <script src="{{ asset('js/quagga.js') }}"></script>
+<script src="{{ asset('js/scripts/consulta.js') }}"></script>
 <script src="{{ asset('js/file_input.js') }}"></script>
 
-<script src="{{ asset('js/scripts/consulta.js') }}"></script>
+
 
 
 
