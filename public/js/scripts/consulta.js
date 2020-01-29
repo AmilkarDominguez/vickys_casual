@@ -1,3 +1,4 @@
+var dolar=6.97;
 var redondeo = 3;
 
 var lat;
@@ -89,6 +90,7 @@ function consultarBarcode(barcode_readed) {
 
 }
 var total = 0;
+var total_usd = 0;
 function AddBasket(obj) {
     Basket.push(obj);
     //console.log("CARRITO!");
@@ -97,8 +99,8 @@ function AddBasket(obj) {
     var code = '<tr id="tr' + row_index + '">';
     code += '<td>' + obj.name + '</td>';
     code += '<td>';
-    code += '<span>' + obj.price + ' Usd.</span><br>';
-    code += '<span class="text-danger">' + obj.price_discount + ' Usd.</span><br>';
+    code += '<span style="text-decoration: line-through;">' + obj.price + ' USD.</span><br>';
+    code += '<span class="text-danger">' + obj.price_discount + ' USD.</span><br>';
     code += '<span style="border-style: solid;">-' + obj.discount + ' %</span>';
     code += '</td>';
 
@@ -111,8 +113,11 @@ function AddBasket(obj) {
     //Sumar Total
 
 
-    total = total + parseFloat(obj.price_discount);
-    $('#total').html(total);
+    total_usd=total_usd + parseFloat(obj.price_discount);
+    $('#total_sus').html(total_usd.toFixed(2)+" USD.");
+
+    total = total_usd*dolar;
+    $('#total').html(total.toFixed(2)+" Bs.");
 }
 
 
@@ -123,6 +128,10 @@ function RemoveBasket(row_i, id, price) {
 
 
     //Restar Total
-    total = total - parseFloat(price);
-    $('#total').html(total);
+
+    total_usd=total_usd - parseFloat(price);
+    $('#total_sus').html(total_usd.toFixed(2)+" USD.");
+
+    total = total_usd*dolar;
+    $('#total').html(total.toFixed(2)+" Bs.");
 }
