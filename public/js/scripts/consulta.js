@@ -97,9 +97,9 @@ function AddBasket(obj) {
     var code = '<tr id="tr' + row_index + '">';
     code += '<td>' + obj.name + '</td>';
     code += '<td>';
-    code += '<span>Precio: ' + obj.price + '</span><br>';
-    code += '<span>Descuento: ' + obj.discount + ' %</span><br>';
-    code += '<span>Precio con descuento: ' + obj.price_discount + '</span>';
+    code += '<span>' + obj.price + ' Usd.</span><br>';
+    code += '<span class="text-danger">' + obj.price_discount + ' Usd.</span><br>';
+    code += '<span style="border-style: solid;">-' + obj.discount + ' %</span>';
     code += '</td>';
 
     code += '<td><a class="btn btn-danger text-white" onclick="RemoveBasket(' + row_index + ',' + obj.id + ',' + obj.price_discount + ')">X</a></td>';
