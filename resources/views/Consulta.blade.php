@@ -127,7 +127,7 @@
                     <table id="table-basket" class="table table-striped">
                         <thead>
                             <tr class="bg-black text-white">
-                                <td>Nombre</td>
+                                <td>Item</td>
                                 <td>Precio</td>
                                 <td>Quitar</td>
                             </tr>
