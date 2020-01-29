@@ -35,8 +35,8 @@
 
 
 <div class="container">
-    <img class="mb-4" src="resources/vc_black.png" alt="" width="250">
-    <h1 class="h3 mb-3 font-weight-normal text-black">ASSISTANT</h1>
+    <img class="mb-4" src="resources/vc_black.png" alt="" width="350">
+    <h2 class="h3 mb-3 font-weight-normal text-black">ASSISTANT</h2>
     <!-- <a class="btn btn-lg bg-black btn-block text-white" data-toggle="modal" data-target="#exampleModal">
         Consulta aquí precios y descuentos
     </a> -->
@@ -135,7 +135,7 @@
                         <tbody>
                         </tbody>
                     </table>
-                    <p class="bg-black text-white">Total <b id="total">0</b></p>
+                    <p class="bg-black text-white">Total <b id="total_sus">0</b><br><b id="total">0</b></p>
                 </div>
             </div>
         </div>
