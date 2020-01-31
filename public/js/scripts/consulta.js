@@ -6,6 +6,8 @@ var lng;
 
 $(document).ready(function () {
     getLocation();
+    console.log('llegando');
+    console.log(user_id);
 });
 
 var x = document.getElementById("position");

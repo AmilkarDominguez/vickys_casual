@@ -41,5 +41,19 @@ class DataSeeder extends Seeder
             'email'=> 'appconsulta@vickyscasual.com',
             'password' => bcrypt('cnslt.963Vc'),    
         ]);
+        $user = App\User::create([
+            'telephone' => '72954379',
+            'password' => bcrypt('12345678'),
+            'remember_token' => str_random(20),
+            'rol' => 'NORMAL',
+            'state' => 'ACTIVO',
+        ]);
+        $user = App\User::create([
+            'telephone' => '75114379',
+            'password' => bcrypt('12345678'),
+            'remember_token' => str_random(20),
+            'rol' => 'NORMAL',
+            'state' => 'ACTIVO',
+        ]);
     }
 }

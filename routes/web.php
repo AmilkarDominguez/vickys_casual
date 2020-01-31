@@ -20,7 +20,7 @@ Auth::routes();
 
 //Route::post('acceso', 'Auth\LoginController@loginsample')->name('acceso');
 
-Route::post('/vc_consulta', 'AuthenticareSample@login')->name('vc_consulta');
+Route::post('/vc_consulta', 'LoginUserController@login')->name('vc_consulta');
 Route::get('consulta', 'ActivityController@consulta')->name('consulta')->middleware('auth');
 
 
