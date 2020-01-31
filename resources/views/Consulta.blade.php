@@ -43,11 +43,11 @@
 
 
 
-    <p id="position"></p>
+    <p hidden id="position"></p>
 
 
 
-    <section id="container" class="container">
+    <section id="container" class="container p-1">
         <div class="controls">
             <fieldset class="input-group">
 
@@ -115,16 +115,16 @@
                 </label>
             </fieldset>
         </div>
-        <div id="result_strip">
+        <div hidden id="result_strip">
             <ul class="thumbnails"></ul>
         </div>
         <!-- <div id="interactive" class="viewport"></div>
         <div id="debug" class="detection"></div> -->
 
         <div class="row">
-            <div class="col-md-12">
+            <div class="col-md-12 p-0">
                 <div class="table-responsive">
-                    <table id="table-basket" class="table table-striped">
+                    <table style="font-size: 75% !important" id="table-basket" class="table table-striped">
                         <thead>
                             <tr class="bg-black text-white">
                                 <td>Item</td>
@@ -135,16 +135,12 @@
                         <tbody>
                         </tbody>
                     </table>
-                    <p class="bg-black text-white">Total <b id="total_sus">0</b><br><b id="total">0</b></p>
+                    <p class="bg-black text-white">Total <b id="total_sus"></b><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <b id="total"></b></p>
                 </div>
             </div>
         </div>
 
     </section>
-
-
-
-
 
 </div>
 
