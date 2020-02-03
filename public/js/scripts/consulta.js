@@ -1,13 +1,14 @@
-var dolar=6.97;
+var dolar = 6.97;
 var redondeo = 3;
 
-var lat;
-var lng;
+var lat = 0;
+var lng = 0;
 
 $(document).ready(function () {
     getLocation();
-    console.log('llegando');
-    console.log(user_id);
+    // console.log('llegando');
+    // console.log(user_id);
+    console.log();
 });
 
 var x = document.getElementById("position");
@@ -39,6 +40,13 @@ var row_index = 1;
 
 function consultarBarcode(barcode_readed) {
 
+    if (lat == 0) {
+        toastr.error("No es posible acceder a tu ubicación");
+        return 0;
+    }
+
+
+
     console.log(barcode_readed);
 
     var obj = {
@@ -57,8 +65,8 @@ function consultarBarcode(barcode_readed) {
                 //console.log(result);
 
                 //Verificar ubicaci
-                var lat_ =  parseFloat(result.obj.store.lat);
-                var lng_ =parseFloat(result.obj.store.lng);
+                var lat_ = parseFloat(result.obj.store.lat);
+                var lng_ = parseFloat(result.obj.store.lng);
 
                 //console.log(lat_);
                 //console.log(lng_);
@@ -115,11 +123,11 @@ function AddBasket(obj) {
     //Sumar Total
 
 
-    total_usd=total_usd + parseFloat(obj.price_discount);
-    $('#total_sus').html(total_usd.toFixed(2)+" USD.");
+    total_usd = total_usd + parseFloat(obj.price_discount);
+    $('#total_sus').html(total_usd.toFixed(2) + " USD.");
 
-    total = total_usd*dolar;
-    $('#total').html(total.toFixed(2)+" Bs.");
+    total = total_usd * dolar;
+    $('#total').html(total.toFixed(2) + " Bs.");
 }
 
 
@@ -131,9 +139,9 @@ function RemoveBasket(row_i, id, price) {
 
     //Restar Total
 
-    total_usd=total_usd - parseFloat(price);
-    $('#total_sus').html(total_usd.toFixed(2)+" USD.");
+    total_usd = total_usd - parseFloat(price);
+    $('#total_sus').html(total_usd.toFixed(2) + " USD.");
 
-    total = total_usd*dolar;
-    $('#total').html(total.toFixed(2)+" Bs.");
+    total = total_usd * dolar;
+    $('#total').html(total.toFixed(2) + " Bs.");
 }
