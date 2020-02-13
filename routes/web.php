@@ -50,3 +50,8 @@ Route::get('Store_list', 'StoreController@list')->middleware('auth');
 Route::resource('Product', 'ProductController')->middleware('auth');
 Route::get('Product_dt', 'ProductController@datatable')->middleware('auth');
 Route::get('Product_list', 'ProductController@list')->middleware('auth');
+
+
+Route::get('reportclientuser','ReportController@reportClientUse')->name('reportclientuser')->middleware('auth');
+Route::get('reportclienreading','ReportController@reportClientReading')->name('reportclienreading')->middleware('auth');
+Route::get('listsucursal', 'StoreController@list')->name('listsucursal')->middleware('auth');

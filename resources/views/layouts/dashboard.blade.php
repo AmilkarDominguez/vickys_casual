@@ -84,6 +84,8 @@
                             </a>
                             <div class="dropdown-menu" aria-labelledby="navbarDropdownReportes">
                                 <a class="dropdown-item" href="{{ route('Activity.index') }}">Consultas registradas</a>
+                                <a class="dropdown-item" href="{{ route('reportclientuser') }}">Reporte Cantidad de Uso</a>
+                                <a class="dropdown-item" href="{{ route('reportclienreading') }}">Reporte Lecturas de Items</a>
                         </li>
                         @endif
                         <li class="nav-item dropdown">
