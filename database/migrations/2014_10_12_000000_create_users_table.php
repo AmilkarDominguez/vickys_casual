@@ -18,6 +18,7 @@ class CreateUsersTable extends Migration
             $table->enum('state', ['ACTIVO', 'INACTIVO','ELIMINADO'])->default('ACTIVO')->nullable();
             $table->string('name')->nullable();
             $table->string('gender')->nullable();
+            $table->string('store')->nullable();
             $table->text('telephone',255)->nullable();
             $table->enum('rol', ['ADMIN', 'NORMAL'])->default('NORMAL')->nullable();
             $table->string('email')->unique()->nullable();

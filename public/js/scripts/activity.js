@@ -14,6 +14,7 @@ function ListDatatable() {
     table = $('#table').DataTable({
         dom: 'lfBrtip',
         //dom: 'lfrtip',
+        lengthMenu: [[10, 25, 50, 100, -1], [10, 25, 50, 100, "Todos"]],
         processing: true,
         serverSide: true,
         "paging": true,
@@ -37,6 +38,9 @@ function ListDatatable() {
                 data: 'user.email'
             },
             {
+                data: 'store_name'
+            },
+            {
                 data: 'product.barcode'
             },
             {
@@ -52,46 +56,46 @@ function ListDatatable() {
             },
         ],
         buttons: [{
-                text: '<i class="icon-eye"></i> ',
-                className: 'rounded btn-dark m-2',
-                titleAttr: 'Columnas',
-                extend: 'colvis'
-            },
-            {
-                text: '<i class="icon-download"></i><i class="icon-file-excel"></i>',
-                className: 'rounded btn-dark m-2',
-                titleAttr: 'Excel',
-                extend: 'excel',
-                exportOptions: {
-                    columns: [0, 1, 2, 3, 4, 5, 6]
-                }
-            },
-            {
-                text: '<i class="icon-download"></i><i class="icon-file-pdf"></i> ',
-                className: 'rounded btn-dark m-2',
-                titleAttr: 'PDF',
-                extend: 'pdf',
-                exportOptions: {
-                    columns: [0, 1, 2, 3, 4, 5, 6]
-                }
-            },
-            {
-                text: '<i class="icon-download"></i><i class="icon-print"></i> ',
-                className: 'rounded btn-dark m-2',
-                titleAttr: 'Imprimir',
-                extend: 'print',
-                exportOptions: {
-                    columns: [0, 1, 2, 3, 4, 5, 6]
-                }
-            },
-            //btn Refresh
-            {
-                text: '<i class="icon-arrows-cw"></i>',
-                className: 'rounded btn-info m-2',
-                action: function () {
-                    table.ajax.reload();
-                }
+            text: '<i class="icon-eye"></i> ',
+            className: 'rounded btn-dark m-2',
+            titleAttr: 'Columnas',
+            extend: 'colvis'
+        },
+        {
+            text: '<i class="icon-download"></i><i class="icon-file-excel"></i>',
+            className: 'rounded btn-dark m-2',
+            titleAttr: 'Excel',
+            extend: 'excel',
+            exportOptions: {
+                columns: [0, 1, 2, 3, 4, 5, 6, 7]
             }
+        },
+        {
+            text: '<i class="icon-download"></i><i class="icon-file-pdf"></i> ',
+            className: 'rounded btn-dark m-2',
+            titleAttr: 'PDF',
+            extend: 'pdf',
+            exportOptions: {
+                columns: [0, 1, 2, 3, 4, 5, 6, 7]
+            }
+        },
+        {
+            text: '<i class="icon-download"></i><i class="icon-print"></i> ',
+            className: 'rounded btn-dark m-2',
+            titleAttr: 'Imprimir',
+            extend: 'print',
+            exportOptions: {
+                columns: [0, 1, 2, 3, 4, 5, 6, 7]
+            }
+        },
+        //btn Refresh
+        {
+            text: '<i class="icon-arrows-cw"></i>',
+            className: 'rounded btn-info m-2',
+            action: function () {
+                table.ajax.reload();
+            }
+        }
         ],
     });
 };

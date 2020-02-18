@@ -26,6 +26,7 @@
                                 <td>Género</td>
                                 <td>Télefono</td>
                                 <td>Email</td>
+                                <td>Sucursal</td>
                                 <td>Código Producto</td>
                                 <td>Nombre producto</td>
                                 <td>Fecha y hora</td>

@@ -46,11 +46,8 @@ class QueryController extends Controller
             return response()->json(['success' => true, 'msg' => 'Registro encontrado', 'obj' => $str]);
 
             foreach ($Stores as $value) {
-
                 // $store_lat = round(floatval($value->lat), 3);
                 // $store_lng = round(floatval($value->lng), 3);
-
-
                 if ($value->id==4) {
                     return response()->json(['success' => true, 'msg' => 'Registro encontrado', 'obj' => $value]);
                     // return response()->json([
@@ -62,9 +59,6 @@ class QueryController extends Controller
                     //     '$value->lng' => $value->lng,
                     // ]);
                 }
-
-
-
                 if ($store_lat === $lat_ && $store_lng===$lng_) {
                    
                     $Store = $value;    
@@ -73,14 +67,7 @@ class QueryController extends Controller
                     return response()->json(['success' => false, 'msg' => 'No se encuntrar registros con la ubicaci車n.']);
                 }
             }
-
             if ($Store != null) {
-
-
-         
-
-
-
             }else {
                 return response()->json(['success' => false, 'msg' => 'No se encuntrar registros con la ubicaci車n.']);
             }
@@ -92,7 +79,7 @@ class QueryController extends Controller
 
     }
 }
-                // //==================================================================================
+                // //======================================================
                 // if($value->id==7){
                                     
                 //     return response()->json(['success' => true, 'msg' => 'LLEGANDO', 
@@ -107,4 +94,4 @@ class QueryController extends Controller
                 //     ]);
                 // }
                 
-                // //========================================================
+                // //=======================================================
