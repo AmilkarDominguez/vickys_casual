@@ -83,9 +83,15 @@
                                 <i class="icon-download"></i>Reportes
                             </a>
                             <div class="dropdown-menu" aria-labelledby="navbarDropdownReportes">
-                                <a class="dropdown-item" href="{{ route('Activity.index') }}">Consultas registradas</a>
-                                <a class="dropdown-item" href="{{ route('reportclientuser') }}">Reporte Cantidad de Uso</a>
-                                <a class="dropdown-item" href="{{ route('reportclienreading') }}">Reporte Lecturas de Items</a>
+                                <a class="dropdown-item" href="{{ route('Activity.index') }}">Lecturas registradas</a>
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item" href="{{ route('client_store') }}">Clientes registrados<br> por sucursal</a>
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item" href="{{ route('count_client_store') }}">Consultas registradas<br> por cliente y sucursal</a>
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item" href="{{ route('count_activity_item') }}">Lecturas por item</a>
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item" href="{{ route('activity_subgroup') }}">Lecturas por subgrupo</a>
                         </li>
                         @endif
                         <li class="nav-item dropdown">
