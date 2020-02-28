@@ -69,11 +69,12 @@ function consultarBarcode(barcode_readed) {
                 var lng_ = parseFloat(result.obj.store.lng);
 
                 //console.log(lat_);
-                //console.log(lng_);
+                // AddBasket(result.obj);
 
                 if (true) {
                     toastr.success(result.msg);
                     AddBasket(result.obj);
+                    console.log(result.obj);
                 } else {
                     toastr.warning("No se encontraron registros coincidentes");
                 }

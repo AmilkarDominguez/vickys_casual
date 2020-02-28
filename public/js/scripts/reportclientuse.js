@@ -159,9 +159,10 @@ function SelectSucursal() {
         },
         success: function (result) {
             var code = '<select class="form-control border-primary" name="collector_id" id="collector_id" required>';
+            code += '<option disabled value="" selected>(Seleccionar)</option>';
             $.each(result, function (key, value) {
-                code += '<option selected value="' + value.id + '">' + value.name + '</option>';
-                code += '<option disabled value="" selected>(Seleccionar)</option>';
+                code += '<option value="' + value.id + '">' + value.name + '</option>';
+
             });
             code += '</select>';
             $("#select_sucursal").html(code);     

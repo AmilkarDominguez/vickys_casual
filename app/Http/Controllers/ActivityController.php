@@ -72,11 +72,7 @@ class ActivityController extends Controller
     //FUNCTIONS
     public function datatable()
     {
-        return datatables()->of(Activity::where('state', '!=', 'ELIMINADO')->with('user', 'product')->get())
-            ->addColumn('store_name', function ($item) {
-                $store = Store::find($item->product->store_id);
-                return  $store->name;
-            })
+        return datatables()->of(Activity::where('state', '!=', 'ELIMINADO')->with('user')->get())
             ->addColumn('Editar', function ($item) {
                 return '<a class="btn btn-xs btn-primary text-white" onclick="Edit(' . $item->id . ')" ><i class="icon-pencil"></i></a>';
             })

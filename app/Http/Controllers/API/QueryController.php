@@ -8,6 +8,7 @@ use App\Http\Controllers\Controller;
 
 use App\User;
 use App\Store;
+use App\Category;
 use App\Subcategory;
 use App\Product;
 use App\Activity;
@@ -35,10 +36,21 @@ class QueryController extends Controller
                         ->with('store', 'subcategory')
                         ->first();
 
+                    $Category = Category::find($Product->subcategory->category_id);
+
+
+
                     //Registro actividad
                     $Activity = Activity::create([
                         'user_id' => $request->user_id,
-                        'product_id' => $Product->id,
+                        'barcode' => $Product->barcode,
+                        'store' => $str->name,
+                        'product' => $Product->name,
+                        'category' => $Category->name,
+                        'subcategory' => $Product->subcategory->name,
+                        'price' => $Product->price,
+                        'discount' => $Product->discount,
+                        'price_discount' => $Product->price_discount,
                     ]);
 
 
@@ -50,29 +62,29 @@ class QueryController extends Controller
 
                     }
 
-                    return response()->json(['success' => true, 'msg' => 'Registro encontrado', 'obj' => $Product]);
+                    return response()->json(['success' => true, 'msg' => 'Registro encontrado 1', 'obj' => $Product]);
                 }
             }
-            return response()->json(['success' => true, 'msg' => 'Registro encontrado', 'obj' => $str]);
+            return response()->json(['success' => true, 'msg' => 'Registro encontrado 2', 'obj' => $str]);
 
             foreach ($Stores as $value) {
 
                 if ($value->id == 4) {
-                    return response()->json(['success' => true, 'msg' => 'Registro encontrado', 'obj' => $value]);
+                    return response()->json(['success' => true, 'msg' => 'Registro encontrado 3', 'obj' => $value]);
                 }
                 if ($store_lat === $lat_ && $store_lng === $lng_) {
 
                     $Store = $value;
                 } else {
-                    return response()->json(['success' => false, 'msg' => 'No se encuntrar registros con la ubicaci車n.']);
+                    return response()->json(['success' => false, 'msg' => 'No se encuntrar registros con la ubicación.']);
                 }
             }
             if ($Store != null) {
             } else {
-                return response()->json(['success' => false, 'msg' => 'No se encuntrar registros con la ubicaci車n.']);
+                return response()->json(['success' => false, 'msg' => 'No se encuntrar registros con la ubicación.']);
             }
         } else {
-            return response()->json(['success' => false, 'msg' => 'El c車digo no esta registrado, intente de nuevo']);
+            return response()->json(['success' => false, 'msg' => 'El código no esta registrado, intente de nuevo']);
         }
     }
 }

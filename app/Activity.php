@@ -9,15 +9,18 @@ class Activity extends Model
     protected $fillable = [
         'state',
         'user_id',
-        'product_id'
+        'barcode',
+        'store',
+        'product',
+        'category',
+        'subcategory',
+        'price',
+        'discount',
+        'price_discount'
     ];
 
     public function user()
     {
         return $this->belongsTo(User::class);
-    }
-    public function product()
-    {
-        return $this->belongsTo(Product::class);
     }
 }
