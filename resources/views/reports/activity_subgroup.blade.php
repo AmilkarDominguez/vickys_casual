@@ -7,7 +7,7 @@
             <div class="card-body">
                 <div class="row">
                     <div class="col-sm-12 d-flex justify-content-center">
-                        <h2 class="card-title text-primary">Consultas registradas por cliente y sucursal</h2>
+                        <h2 class="card-title text-primary">Consultas registradas por subgrupo y sucursal</h2>
                     </div>
                 </div>
             </div>
@@ -62,10 +62,8 @@
                     <table id="table" class="table table-striped">
                         <thead>
                             <tr>
-                                <td>Nro. Consultas</td>
-                                <td>Nombre usuario</td>
-                                <td>Télefono</td>
-                                <td>Email</td>
+                                <td>Nro. Lecturas</td>
+                                <td>Subgrupo</td>
                             </tr>
                         </thead>
                     </table>
@@ -121,7 +119,7 @@
                     "url": "/js/assets/Spanish.json"
                 },
                 ajax: {
-                    url: '/countclientstore',
+                    url: '/activitysubgroup',
                     data: function(obj) {
                         obj.store_id = $("#store_id").val();
                         obj.minimum_date = $("#minimum_date").val();
@@ -132,13 +130,7 @@
                         data: 'nro_activities'
                     },
                     {
-                        data: 'user_name'
-                    },
-                    {
-                        data: 'user_telephone'
-                    },
-                    {
-                        data: 'user_email'
+                        data: 'subgroup'
                     }
                 ],
                 buttons: [{
@@ -153,7 +145,7 @@
                         titleAttr: 'Excel',
                         extend: 'excel',
                         exportOptions: {
-                            columns: [0, 1, 2, 3]
+                            columns: [0, 1]
                         }
                     },
                     {
@@ -162,7 +154,7 @@
                         titleAttr: 'PDF',
                         extend: 'pdf',
                         exportOptions: {
-                            columns: [0, 1, 2, 3]
+                            columns: [0, 1]
                         }
                     },
                     {
@@ -170,10 +162,10 @@
                         className: 'rounded btn-dark m-2',
                         titleAttr: 'Imprimir',
                         extend: 'print',
-                        messageTop: 'Consultas registradas por cliente y sucursal: ' + $("#store_id option:selected").text() + '<br>Fechas: ' + $("#minimum_date").val() + ' - ' + $("#maximum_date").val(),
+                        messageTop: 'Consultas registradas por subgrupo y sucursal: ' + $("#store_id option:selected").text() + '<br>Fechas: ' + $("#minimum_date").val() + ' - ' + $("#maximum_date").val(),
                         footer: true,
                         exportOptions: {
-                            columns: [0, 1, 2, 3]
+                            columns: [0, 1]
                         }
                     },
                     //btn Refresh

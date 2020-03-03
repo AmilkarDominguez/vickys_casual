@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 use App\User;
 use App\Store;
 use App\Activity;
+use App\Product;
+use DB;
 
 class ReportController extends Controller
 {
@@ -29,11 +31,24 @@ class ReportController extends Controller
     public function countclientstore(Request $request)
     {
         $Store = Store::find($request->store_id);
-        return datatables()->of(Activity::where('store', $Store->name)->whereBetween('created_at', [$request->minimum_date, $request->maximum_date])->orderBy('user_id')->with('user')->get())
-
+        // return datatables()->of(Activity::where('store', $Store->name)->whereBetween('created_at', [$request->minimum_date, $request->maximum_date])->orderBy('user_id')->with('user')->get())
+        // return datatables()->of(DB::table('activities')->groupBy('user_id')->pluck('user_id')->toArray())
+        return datatables()->of(Activity::where('store', $Store->name)->whereBetween('created_at', [$request->minimum_date, $request->maximum_date])->groupBy('user_id')->pluck('user_id')->toArray())
             ->addColumn('nro_activities', function ($item) use ($Store, $request) {
-                $count = Activity::where('store', $Store->name)->where('user_id', $item->user_id)->whereBetween('created_at', [$request->minimum_date, $request->maximum_date])->count();
+                $count = Activity::where('store', $Store->name)->where('user_id', $item)->whereBetween('created_at', [$request->minimum_date, $request->maximum_date])->count();
                 return  $count;
+            })
+            ->addColumn('user_name', function ($item) {
+                $user = User::find($item);
+                return  $user->name;
+            })
+            ->addColumn('user_telephone', function ($item) {
+                $user = User::find($item);
+                return  $user->telephone;
+            })
+            ->addColumn('user_email', function ($item) {
+                $user = User::find($item);
+                return  $user->email;
             })
             ->toJson();
     }
@@ -44,7 +59,19 @@ class ReportController extends Controller
     }
     public function countactivityitem(Request $request)
     {
-        return datatables()->of(Activity::all()->where('payment_status_id', 5)->where('seller_id', $request->seller_id)->whereBetween('date', [$request->minimum_date, $request->maximum_date]))
+        $Store = Store::find($request->store_id);
+        return datatables()->of(Activity::where('store', $Store->name)->whereBetween('created_at', [$request->minimum_date, $request->maximum_date])->groupBy('barcode')->pluck('barcode')->toArray())
+            ->addColumn('nro_activities', function ($item) use ($Store, $request) {
+                $count = Activity::where('store', $Store->name)->where('barcode', $item)->whereBetween('created_at', [$request->minimum_date, $request->maximum_date])->count();
+                return  $count;
+            })
+            ->addColumn('barcode', function ($item) {
+                return  $item;
+            })
+            ->addColumn('product', function ($item) use ($Store, $request) {
+                $activity = Activity::where('store', $Store->name)->where('barcode', $item)->whereBetween('created_at', [$request->minimum_date, $request->maximum_date])->first();
+                return  $activity->product;
+            })
             ->toJson();
     }
     // 4.- Sacar por rango de fecha y sucursal cantidad de lecturado por sub-grupo
@@ -54,7 +81,15 @@ class ReportController extends Controller
     }
     public function activitysubgroup(Request $request)
     {
-        return datatables()->of(Activity::all()->where('payment_status_id', 5)->where('seller_id', $request->seller_id)->whereBetween('date', [$request->minimum_date, $request->maximum_date]))
+        $Store = Store::find($request->store_id);
+        return datatables()->of(Activity::where('store', $Store->name)->whereBetween('created_at', [$request->minimum_date, $request->maximum_date])->groupBy('subcategory')->pluck('subcategory')->toArray())
+            ->addColumn('nro_activities', function ($item) use ($Store, $request) {
+                $count = Activity::where('store', $Store->name)->where('subcategory', $item)->whereBetween('created_at', [$request->minimum_date, $request->maximum_date])->count();
+                return  $count;
+            })
+            ->addColumn('subgroup', function ($item) {
+                return  $item;
+            })
             ->toJson();
     }
 }
