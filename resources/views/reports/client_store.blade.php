@@ -137,7 +137,7 @@
                     data: function(obj) {
                         obj.store_id = $("#store_id").val();
                         obj.minimum_date = $("#minimum_date").val();
-                        obj.maximum_date = $("#maximum_date").val();
+                        obj.maximum_date = moment($("#maximum_date").val()).add(1, 'd').format( "YYYY-MM-DD");
                     }
                 },
                 columns: [
